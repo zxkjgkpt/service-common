@@ -3,7 +3,7 @@ db:
   username: root
   password:
 author: auto
-packageName: com.yfny.servicecommon
+packageName: com.yfny.utilscommon
 path:
   controller: controller
   service: service.impl

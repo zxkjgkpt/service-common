@@ -3,11 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.yfny</groupId>
-    <artifactId>service-common</artifactId>
+    <artifactId>utils-common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>service-common</name>
+    <name>utils-common</name>
     <description>基础工具类支持</description>
 
     <!-- 可根据实际情况选择父依赖 -->
@@ -31,7 +31,7 @@
         <!-- 通用java对象类 -->
         <dependency>
             <groupId>com.yfny</groupId>
-            <artifactId>service-pojo</artifactId>
+            <artifactId>core-pojo</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!-- web项目依赖 -->
