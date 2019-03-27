@@ -13,13 +13,14 @@ import java.util.Locale;
 public class FreemarketConfigUtils {
     private static String path = new File(FreemarketConfigUtils.class.getClassLoader().getResource("ftls").getFile()).getPath();
     public final static int TYPE_ENTITY = 0;
-    public final static int TYPE_DAO = 1;
-    public final static int TYPE_SERVICE = 2;
-    public final static int TYPE_CONTROLLER = 3;
-    public final static int TYPE_MAPPER = 4;
-    public final static int TYPE_INTERFACE = 5;
+    public final static int TYPE_PRODUCER_MAPPER = 1;
+    public final static int TYPE_PRODUCER_BASE_SERVICE = 2;
+    public final static int TYPE_PRODUCER_SERVICE = 3;
+    public final static int TYPE_PRODUCER_BASE_CONTROLLER = 4;
+    public final static int TYPE_PRODUCER_CONTROLLER = 5;
     public final static int TYPE_API_BASE_TEST = 6;
     public final static int TYPE_API_UNIT_TEST = 7;
+
     private static Configuration configuration;
 
     public static synchronized Configuration getInstance() {

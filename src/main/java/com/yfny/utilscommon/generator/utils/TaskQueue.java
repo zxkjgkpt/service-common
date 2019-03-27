@@ -1,8 +1,11 @@
 package com.yfny.utilscommon.generator.utils;
 
 import com.yfny.utilscommon.generator.entity.ColumnInfo;
-import com.yfny.utilscommon.generator.task.*;
+import com.yfny.utilscommon.generator.task.APIBaseTestTask;
+import com.yfny.utilscommon.generator.task.APIUnitTestTask;
+import com.yfny.utilscommon.generator.task.EntityTask;
 import com.yfny.utilscommon.generator.task.base.AbstractTask;
+import com.yfny.utilscommon.generator.task.producer.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -14,51 +17,36 @@ import java.util.List;
 public class TaskQueue {
 
     private LinkedList<AbstractTask> taskQueue = new LinkedList<>();
+    
+    /******************************************************此下方法为改造新增开始*****************************************************************/
 
-    private void initCommonTasks(String className) {
+    public void initSingleTasks(String className, String tableName, String description, List<ColumnInfo> tableInfos) {
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getEntity())) {
+            taskQueue.add(new EntityTask(className, tableName, description, tableInfos));
+        }
+    }
+
+    private void initProducerBaseTasks(String className) {
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getController())) {
-            taskQueue.add(new ControllerTask(className));
+            taskQueue.add(new ProducerBaseControllerTask(className));
         }
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getService())) {
-            taskQueue.add(new ServiceTask(className));
-        }
-        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getInterf())) {
-            taskQueue.add(new InterfaceTask(className));
-        }
-        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getDao())) {
-            taskQueue.add(new DaoTask(className));
+            taskQueue.add(new ProducerBaseServiceImplTask(className));
         }
     }
 
-    public void initSingleTasks(String className, String tableName, List<ColumnInfo> tableInfos) {
-        initCommonTasks(className);
-        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getEntity())) {
-            taskQueue.add(new EntityTask(className, tableInfos));
+    public void initProducerTasks(String className, String description, boolean isFirst) {
+        if (isFirst) {
+            initProducerBaseTasks(className);
+        }
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getController())) {
+            taskQueue.add(new ProducerControllerTask(className, description));
+        }
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getService())) {
+            taskQueue.add(new ProducerServiceImplTask(className, description));
         }
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getMapper())) {
-            taskQueue.add(new MapperTask(className, tableName, tableInfos));
-        }
-    }
-
-    public void initOne2ManyTasks(String tableName, String className, String parentTableName, String parentClassName, String foreignKey, List<ColumnInfo> tableInfos, List<ColumnInfo> parentTableInfos) {
-        initCommonTasks(className);
-        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getEntity())) {
-            taskQueue.add(new EntityTask(className, parentClassName, foreignKey, tableInfos));
-            taskQueue.add(new EntityTask(parentClassName, parentTableInfos));
-        }
-        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getMapper())) {
-            taskQueue.add(new MapperTask(tableName, className, parentTableName, parentClassName, foreignKey, tableInfos, parentTableInfos));
-        }
-    }
-
-    public void initMany2ManyTasks(String tableName, String className, String parentTableName, String parentClassName, String foreignKey, String parentForeignKey, String relationalTableName, List<ColumnInfo> tableInfos, List<ColumnInfo> parentTableInfos) {
-        initCommonTasks(className);
-        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getEntity())) {
-            taskQueue.add(new EntityTask(className, parentClassName, foreignKey, parentForeignKey, tableInfos));
-            taskQueue.add(new EntityTask(parentClassName, parentTableInfos));
-        }
-        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getMapper())) {
-            taskQueue.add(new MapperTask(tableName, className, parentTableName, parentClassName, foreignKey, parentForeignKey, relationalTableName, tableInfos, parentTableInfos));
+            taskQueue.add(new ProducerMapperTask(className, description));
         }
     }
 
@@ -70,6 +58,8 @@ public class TaskQueue {
             taskQueue.add(new APIUnitTestTask(className));
         }
     }
+
+    /******************************************************此下方法为改造新增结束*****************************************************************/
 
     public boolean isEmpty() {
         return taskQueue.isEmpty();

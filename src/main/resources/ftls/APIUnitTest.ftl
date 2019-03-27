@@ -8,9 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
-* Author ${Author}
-* Date  ${Date}
-*/
+ * 接口页面模拟单元测试
+ * Author ${Author}
+ * Date  ${Date}
+ */
 public class APIUnitTest extends APIBaseTest {
 
     <#list RequestInfoList as RequestInfo>

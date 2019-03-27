@@ -20,10 +20,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
-* 测试类通用实现
-* Author ${Author}
-* Date  ${Date}
-**/
+ * 测试类通用实现
+ * Author ${Author}
+ * Date  ${Date}
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public abstract class APIBaseTest extends Thread {

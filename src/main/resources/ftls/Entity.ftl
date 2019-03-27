@@ -1,5 +1,8 @@
 package ${BasePackageName}${EntityPackageName};
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
 import java.math.BigDecimal;
@@ -8,15 +11,35 @@ import java.sql.Time;
 import java.sql.Timestamp;
 
 /**
+ * ${Description}Entity
  * Author ${Author}
  * Date  ${Date}
  */
-public class ${ClassName} implements Serializable {
-    private static final long serialVersionUID = 1L;
-    ${Properties}
+@Table(name = "${TableName}")
+public class ${ClassName}Entity implements Serializable {
 
-    public ${ClassName}(){
+    private static final long serialVersionUID = 1L;
+
+    <#list ColumnInfoList as ColumnInfo>
+        <#if ColumnInfo.primaryKey>
+    @Id
+        </#if>
+    @Column(name = "${ColumnInfo.columnName}")
+    private ${ColumnInfo.typeName} ${ColumnInfo.propertyName};
+
+    </#list>
+
+    public ${ClassName}Entity(){
     }
 
-    ${Methods}
+    <#list ColumnInfoList as ColumnInfo>
+    public ${ColumnInfo.typeName} get${ColumnInfo.propertyName?cap_first}() {
+        return ${ColumnInfo.propertyName};
+    }
+
+    public void set${ColumnInfo.propertyName?cap_first}(${ColumnInfo.typeName} ${ColumnInfo.propertyName}) {
+        this.${ColumnInfo.propertyName} = ${ColumnInfo.propertyName};
+    }
+
+    </#list>
 }

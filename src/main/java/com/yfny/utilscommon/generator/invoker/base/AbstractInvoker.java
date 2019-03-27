@@ -21,6 +21,7 @@ import java.util.concurrent.Executors;
 public abstract class AbstractInvoker implements Invoker {
     protected String tableName;
     protected String className;
+    protected String description;//新增属性--描述
     protected String parentTableName;
     protected String parentClassName;
     protected String foreignKey;
@@ -77,6 +78,10 @@ public abstract class AbstractInvoker implements Invoker {
         this.className = className;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public void setParentTableName(String parentTableName) {
         this.parentTableName = parentTableName;
     }
@@ -103,6 +108,10 @@ public abstract class AbstractInvoker implements Invoker {
 
     public String getClassName() {
         return className;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public String getParentTableName() {

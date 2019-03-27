@@ -17,6 +17,7 @@ import java.util.List;
 public abstract class AbstractTask implements Serializable {
     protected String tableName;
     protected String className;
+    protected String description;//新增属性--描述
     protected String parentTableName;
     protected String parentClassName;
     protected String foreignKey;
@@ -35,6 +36,16 @@ public abstract class AbstractTask implements Serializable {
     }
 
     /**
+     * Controller、Service、Dao
+     *
+     * @param className
+     */
+    public AbstractTask(String className, String description) {
+        this.className = className;
+        this.description = description;
+    }
+
+    /**
      * Entity
      *
      * @param className
@@ -42,8 +53,10 @@ public abstract class AbstractTask implements Serializable {
      * @param foreignKey
      * @param tableInfos
      */
-    public AbstractTask(String className, String parentClassName, String foreignKey, String parentForeignKey, List<ColumnInfo> tableInfos) {
+    public AbstractTask(String className, String tableName, String description, String parentClassName, String foreignKey, String parentForeignKey, List<ColumnInfo> tableInfos) {
         this.className = className;
+        this.tableName = tableName;
+        this.description = description;
         this.parentClassName = parentClassName;
         this.foreignKey = foreignKey;
         this.parentForeignKey = parentForeignKey;

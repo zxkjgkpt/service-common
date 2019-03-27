@@ -1,3 +1,4 @@
+##########################################################服务生产者配置示例##########################################################
 db:
   url: jdbc:mysql://127.0.0.1:3306/test_user?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
   username: root
@@ -8,8 +9,8 @@ entityPackageName: com.yfny.corepojo
 path:
   controller: controller
   service: service
-  interf: service
-  entity: entity
+  interf:
+  entity:
   mapper: mapper
   basetest: base
   unittest: unit

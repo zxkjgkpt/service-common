@@ -27,7 +27,6 @@ public class APIUnitTestTask extends AbstractTask {
     @Override
     public void run() throws IOException, TemplateException {
         // 生成APIUnitTest填充数据
-        System.out.println("Generating APIUnitTest.java");
         Map<String, Object> testData = new HashMap<>();
         testData.put("BasePackageName", ConfigUtil.getConfiguration().getPackageName());
         testData.put("APIUnitTestPackageName", ConfigUtil.getConfiguration().getPath().getUnittest());
@@ -37,7 +36,8 @@ public class APIUnitTestTask extends AbstractTask {
         testData.put("RequestInfoList", CodeInfoUtils.getRequestInfos());
         String filePath = FileUtil.getTestPath() + StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) + StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getUnittest());
         String fileName = "APIUnitTest.java";
-        // 生成Controller文件
+        // 生成APIUnitTest文件
+        System.out.println("Generating " + fileName);
         FileUtil.generateToJava(FreemarketConfigUtils.TYPE_API_UNIT_TEST, testData, filePath + fileName);
     }
 }

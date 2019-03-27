@@ -1,6 +1,7 @@
 package com.yfny.utilscommon.generator.entity;
 
 import com.yfny.utilscommon.generator.utils.StringUtil;
+import com.yfny.utilscommon.generator.utils.TypeUtil;
 
 import java.io.Serializable;
 
@@ -11,6 +12,7 @@ import java.io.Serializable;
 public class ColumnInfo implements Serializable {
     private String columnName; // 列名
     private int type; // 类型代码
+    private String typeName; //类型名称
     private String propertyName; // 属性名
     private boolean isPrimaryKey; // 是否主键
 
@@ -21,6 +23,7 @@ public class ColumnInfo implements Serializable {
     public ColumnInfo(String columnName, int type, boolean isPrimaryKey) {
         this.columnName = columnName;
         this.type = type;
+        this.typeName = TypeUtil.parseTypeFormSqlType(type);
         this.propertyName = StringUtil.columnName2PropertyName(columnName);
         this.isPrimaryKey = isPrimaryKey;
     }
@@ -39,6 +42,14 @@ public class ColumnInfo implements Serializable {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 
     public String getPropertyName() {

@@ -51,16 +51,16 @@ public class FileUtil {
         switch (type) {
             case FreemarketConfigUtils.TYPE_ENTITY:
                 return FreemarketConfigUtils.getInstance().getTemplate("Entity.ftl");
-            case FreemarketConfigUtils.TYPE_DAO:
-                return FreemarketConfigUtils.getInstance().getTemplate("Dao.ftl");
-            case FreemarketConfigUtils.TYPE_SERVICE:
-                return FreemarketConfigUtils.getInstance().getTemplate("Service.ftl");
-            case FreemarketConfigUtils.TYPE_CONTROLLER:
-                return FreemarketConfigUtils.getInstance().getTemplate("Controller.ftl");
-            case FreemarketConfigUtils.TYPE_MAPPER:
-                return FreemarketConfigUtils.getInstance().getTemplate("Mapper.ftl");
-            case FreemarketConfigUtils.TYPE_INTERFACE:
-                return FreemarketConfigUtils.getInstance().getTemplate("Interface.ftl");
+            case FreemarketConfigUtils.TYPE_PRODUCER_MAPPER:
+                return FreemarketConfigUtils.getInstance().getTemplate("ProducerMapper.ftl");
+            case FreemarketConfigUtils.TYPE_PRODUCER_BASE_SERVICE:
+                return FreemarketConfigUtils.getInstance().getTemplate("ProducerBaseServiceImpl.ftl");
+            case FreemarketConfigUtils.TYPE_PRODUCER_SERVICE:
+                return FreemarketConfigUtils.getInstance().getTemplate("ProducerServiceImpl.ftl");
+            case FreemarketConfigUtils.TYPE_PRODUCER_BASE_CONTROLLER:
+                return FreemarketConfigUtils.getInstance().getTemplate("ProducerBaseController.ftl");
+            case FreemarketConfigUtils.TYPE_PRODUCER_CONTROLLER:
+                return FreemarketConfigUtils.getInstance().getTemplate("ProducerController.ftl");
             case FreemarketConfigUtils.TYPE_API_BASE_TEST:
                 return FreemarketConfigUtils.getInstance().getTemplate("APIBaseTest.ftl");
             case FreemarketConfigUtils.TYPE_API_UNIT_TEST:
