@@ -1,5 +1,6 @@
 package ${BasePackageName}${ControllerPackageName};
 
+import com.yfny.utilscommon.util.InvokeResult;
 import ${BasePackageName}${ServicePackageName}.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +28,14 @@ public class BaseController<T> {
      */
     @PostMapping(value = "/insert")
     @ResponseBody
-    public int insert(@RequestBody T entity) throws Exception {
-        return getBaseService().insert(entity);
+    public InvokeResult insert(@RequestBody T entity) throws Exception {
+        int result = getBaseService().insert(entity);
+        if (result == 1) {
+            return InvokeResult.success("20001", result);
+        }else if (result == -1) {
+            return InvokeResult.failure("10003", "网络请求超时或服务器崩溃");
+        }
+        return InvokeResult.failure("20002");
     }
 
     /**
@@ -38,8 +45,14 @@ public class BaseController<T> {
      */
     @PostMapping(value = "/insertSelective")
     @ResponseBody
-    public int insertSelective(@RequestBody T entity) throws Exception {
-        return getBaseService().insertSelective(entity);
+    public InvokeResult insertSelective(@RequestBody T entity) throws Exception {
+        int result = getBaseService().insertSelective(entity);
+        if (result == 1) {
+            return InvokeResult.success("20001", result);
+        }else if (result == -1) {
+            return InvokeResult.failure("10003", "网络请求超时或服务器崩溃");
+        }
+        return InvokeResult.failure("20002");
     }
 
     /**
@@ -49,8 +62,14 @@ public class BaseController<T> {
      */
     @PostMapping(value = "/update")
     @ResponseBody
-    public int update(@RequestBody T entity) throws Exception {
-        return getBaseService().update(entity);
+    public InvokeResult update(@RequestBody T entity) throws Exception {
+        int result = getBaseService().update(entity);
+        if (result == 1) {
+            return InvokeResult.success("20001", result);
+        }else if (result == -1) {
+            return InvokeResult.failure("10003", "网络请求超时或服务器崩溃");
+        }
+        return InvokeResult.failure("20002");
     }
 
     /**
@@ -60,8 +79,14 @@ public class BaseController<T> {
      */
     @PostMapping(value = "/updateSelective")
     @ResponseBody
-    public int updateSelective(@RequestBody T entity) throws Exception {
-        return getBaseService().updateSelective(entity);
+    public InvokeResult updateSelective(@RequestBody T entity) throws Exception {
+        int result = getBaseService().updateSelective(entity);
+        if (result == 1) {
+            return InvokeResult.success("20001", result);
+        }else if (result == -1) {
+            return InvokeResult.failure("10003", "网络请求超时或服务器崩溃");
+        }
+        return InvokeResult.failure("20002");
     }
 
     /**
@@ -71,8 +96,14 @@ public class BaseController<T> {
      */
     @PostMapping(value = "/delete")
     @ResponseBody
-    public int delete(@RequestBody T entity) throws Exception {
-        return getBaseService().delete(entity);
+    public InvokeResult delete(@RequestBody T entity) throws Exception {
+        int result = getBaseService().delete(entity);
+        if (result == 1) {
+            return InvokeResult.success("20003", result);
+        }else if (result == -1) {
+            return InvokeResult.failure("10003", "网络请求超时或服务器崩溃");
+        }
+        return InvokeResult.failure("20004");
     }
 
     /**
@@ -82,19 +113,14 @@ public class BaseController<T> {
      */
     @PostMapping(value = "/deleteByPrimaryKey")
     @ResponseBody
-    public int deleteByPrimaryKey(@RequestParam(value = "key") Object key) throws Exception {
-        return getBaseService().deleteByPrimaryKey(key);
-    }
-
-    /**
-     * 根据主键字段进行删除，方法参数必须包含完整的主键属性
-     * @param   key  主键
-     * @return  返回false为不存在，返回true为存在
-     */
-    @GetMapping(value = "/existsWithPrimaryKey")
-    @ResponseBody
-    public boolean existsWithPrimaryKey(@RequestParam(value = "key") Object key) throws Exception {
-        return getBaseService().existsWithPrimaryKey(key);
+    public InvokeResult deleteByPrimaryKey(@RequestParam(value = "key") Object key) throws Exception {
+        int result = getBaseService().deleteByPrimaryKey(key);
+        if (result == 1) {
+            return InvokeResult.success("20003", result);
+        }else if (result == -1) {
+            return InvokeResult.failure("10003", "网络请求超时或服务器崩溃");
+        }
+        return InvokeResult.failure("20004");
     }
 
     /**
@@ -104,8 +130,14 @@ public class BaseController<T> {
      */
     @PostMapping(value = "/selectOne")
     @ResponseBody
-    public T selectOne(T entity) throws Exception {
-        return getBaseService().selectOne(entity);
+    public InvokeResult selectOne(T entity) throws Exception {
+        T result = getBaseService().selectOne(entity);
+        if (result != null) {
+            return InvokeResult.success(result);
+        }else if (result == null) {
+            return InvokeResult.failure("10003", "网络请求超时或服务器崩溃");
+        }
+        return InvokeResult.failure();
     }
 
     /**
@@ -115,8 +147,14 @@ public class BaseController<T> {
      */
     @GetMapping(value = "/selectByPrimaryKey")
     @ResponseBody
-    public T selectByPrimaryKey(@RequestParam(value = "key") Object key) throws Exception {
-        return getBaseService().selectByPrimaryKey(key);
+    public InvokeResult selectByPrimaryKey(@RequestParam(value = "key") Object key) throws Exception {
+        T result = getBaseService().selectByPrimaryKey(key);
+        if (result != null) {
+            return InvokeResult.success(result);
+        }else if (result == null) {
+            return InvokeResult.failure("10003", "数据不存在或网络请求超时或服务器崩溃");
+        }
+        return InvokeResult.failure();
     }
 
     /**
@@ -126,8 +164,14 @@ public class BaseController<T> {
      */
     @PostMapping(value = "/selectCount")
     @ResponseBody
-    public int selectCount(T entity) throws Exception {
-        return getBaseService().selectCount(entity);
+    public InvokeResult selectCount(T entity) throws Exception {
+        int result = getBaseService().selectCount(entity);
+        if (result >= 0) {
+            return InvokeResult.success("20003", result);
+        }else if (result == -1) {
+            return InvokeResult.failure("10003", "网络请求超时或服务器崩溃");
+        }
+        return InvokeResult.failure("20004");
     }
 
     /**
@@ -137,8 +181,14 @@ public class BaseController<T> {
      */
     @PostMapping(value = "/findList")
     @ResponseBody
-    public List<T> findList1(T entity) throws Exception {
-        return getBaseService().findList(entity);
+    public InvokeResult findList1(T entity) throws Exception {
+        List<T> result = getBaseService().findList(entity);
+        if (result != null) {
+            return InvokeResult.success(result);
+        }else if (result == null) {
+            return InvokeResult.failure("10003", "网络请求超时或服务器崩溃");
+        }
+        return InvokeResult.failure();
     }
 
     /**
@@ -150,8 +200,14 @@ public class BaseController<T> {
      */
     @PostMapping(value = "/findList/{pageNum}/{pageSize}")
     @ResponseBody
-    public List<T> findList2(T entity, @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
-        return getBaseService().findList(entity, pageNum, pageSize);
+    public InvokeResult findList2(T entity, @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
+        List<T> result = getBaseService().findList(entity, pageNum, pageSize);
+        if (result != null) {
+            return InvokeResult.success(result);
+        }else if (result == null) {
+            return InvokeResult.failure("10003", "网络请求超时或服务器崩溃");
+        }
+        return InvokeResult.failure();
     }
 
     /**
@@ -160,8 +216,14 @@ public class BaseController<T> {
      */
     @GetMapping(value = "/findAllList")
     @ResponseBody
-    public List<T> findAllList1() throws Exception {
-        return getBaseService().findAllList();
+    public InvokeResult findAllList1() throws Exception {
+        List<T> result = getBaseService().findAllList();
+        if (result != null) {
+            return InvokeResult.success(result);
+        }else if (result == null) {
+            return InvokeResult.failure("10003", "网络请求超时或服务器崩溃");
+        }
+        return InvokeResult.failure();
     }
 
     /**
@@ -172,8 +234,14 @@ public class BaseController<T> {
      */
     @GetMapping(value = "/findAllList/{pageNum}/{pageSize}")
     @ResponseBody
-    public List<T> findAllList2(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
-        return getBaseService().findAllList(pageNum, pageSize);
+    public InvokeResult findAllList2(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
+        List<T> result = getBaseService().findAllList(pageNum, pageSize);
+        if (result != null) {
+            return InvokeResult.success(result);
+        }else if (result == null) {
+            return InvokeResult.failure("10003", "网络请求超时或服务器崩溃");
+        }
+        return InvokeResult.failure();
     }
 
 }

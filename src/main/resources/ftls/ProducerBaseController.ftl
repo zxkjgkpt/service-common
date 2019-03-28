@@ -4,6 +4,7 @@ import ${BasePackageName}${ServicePackageName}.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -105,7 +106,8 @@ public abstract class BaseController<T> {
     @PostMapping(value = "/selectOne")
     @ResponseBody
     public T selectOne(T entity) throws Exception {
-        return getBaseService().selectOne(entity);
+        T result = getBaseService().selectOne(entity);
+        return result;
     }
 
     /**
@@ -116,7 +118,8 @@ public abstract class BaseController<T> {
     @GetMapping(value = "/selectByPrimaryKey")
     @ResponseBody
     public T selectByPrimaryKey(@RequestParam(value = "key") Object key) throws Exception {
-        return getBaseService().selectByPrimaryKey(key);
+        T result = getBaseService().selectByPrimaryKey(key);
+        return result;
     }
 
     /**
@@ -138,7 +141,11 @@ public abstract class BaseController<T> {
     @PostMapping(value = "/findList")
     @ResponseBody
     public List<T> findList1(T entity) throws Exception {
-        return getBaseService().findList(entity);
+        List<T> result = getBaseService().findList(entity);
+        if (result == null) {
+            result = new ArrayList<>();
+        }
+        return result;
     }
 
     /**
@@ -151,7 +158,11 @@ public abstract class BaseController<T> {
     @PostMapping(value = "/findList/{pageNum}/{pageSize}")
     @ResponseBody
     public List<T> findList2(T entity, @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
-        return getBaseService().findList(entity, pageNum, pageSize);
+        List<T> result = getBaseService().findList(entity, pageNum, pageSize);
+        if (result == null) {
+            result = new ArrayList<>();
+        }
+        return result;
     }
 
     /**
@@ -161,7 +172,11 @@ public abstract class BaseController<T> {
     @GetMapping(value = "/findAllList")
     @ResponseBody
     public List<T> findAllList1() throws Exception {
-        return getBaseService().findAllList();
+        List<T> result = getBaseService().findAllList();
+        if (result == null) {
+            result = new ArrayList<>();
+        }
+        return result;
     }
 
     /**
@@ -173,7 +188,11 @@ public abstract class BaseController<T> {
     @GetMapping(value = "/findAllList/{pageNum}/{pageSize}")
     @ResponseBody
     public List<T> findAllList2(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
-        return getBaseService().findAllList(pageNum, pageSize);
+        List<T> result = getBaseService().findAllList(pageNum, pageSize);
+        if (result == null) {
+            result = new ArrayList<>();
+        }
+        return result;
     }
 
 }

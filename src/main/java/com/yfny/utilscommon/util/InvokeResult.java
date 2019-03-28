@@ -9,6 +9,10 @@ import java.text.MessageFormat;
 
 public class InvokeResult<T> {
 
+    private final static int SUCCESS = 0;
+    private final static int FAILURE = 1;
+    private final static int EXCEPTION = 2;
+
     //响应状态
     private String code;
 
@@ -22,7 +26,11 @@ public class InvokeResult<T> {
     private static PropertiesLoader loader = new PropertiesLoader("props/returnCode.properties");
 
     public static <T> InvokeResult success(T data) {
-        return getResultInit("", "", data, null);
+        return success("", data, null);
+    }
+
+    public static <T> InvokeResult success(String code, T data, String... params) {
+        return getResultInit("", "", data, SUCCESS, null);
     }
 
     public static InvokeResult failure() {
@@ -34,7 +42,7 @@ public class InvokeResult<T> {
     }
 
     public static <T> InvokeResult failure(String code, T data, String... params) {
-        return getResultInit(code, "", data, params);
+        return getResultInit(code, "", data, FAILURE, params);
     }
 
     public static InvokeResult exception() {
@@ -42,7 +50,7 @@ public class InvokeResult<T> {
     }
 
     public static InvokeResult exception(String code, String... params) {
-        return getResultInit(code, "", null, params);
+        return getResultInit(code, "", null, EXCEPTION, params);
     }
 
     /**
@@ -54,11 +62,14 @@ public class InvokeResult<T> {
      * @param params
      * @return
      */
-    private static InvokeResult getResultInit(String code, String message, Object data, String[] params) {
+    private static InvokeResult getResultInit(String code, String message, Object data, int type, String[] params) {
         InvokeResult result = new InvokeResult();
         code = StringUtils.isNotBlank(code) ? code : "10001";
         message = StringUtils.isNotBlank(message) ? message : getMsgFromCfg(code, params);
         data = data != null ? data : StringUtils.isUTF8(message);
+        if (type == SUCCESS) {
+            code = "10001";
+        }
         result.setCode(code);
         result.setMessage(message);
         result.setData(data);
