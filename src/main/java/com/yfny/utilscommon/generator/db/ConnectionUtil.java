@@ -2,6 +2,7 @@ package com.yfny.utilscommon.generator.db;
 
 import com.yfny.utilscommon.generator.entity.ColumnInfo;
 import com.yfny.utilscommon.generator.utils.ConfigUtil;
+import com.yfny.utilscommon.generator.utils.StringUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -23,12 +24,14 @@ public class ConnectionUtil {
      */
     public boolean initConnection() {
         try {
-            Class.forName(DriverFactory.getDriver(ConfigUtil.getConfiguration().getDb().getUrl()));
-            String url = ConfigUtil.getConfiguration().getDb().getUrl();
-            String username = ConfigUtil.getConfiguration().getDb().getUsername();
-            String password = ConfigUtil.getConfiguration().getDb().getPassword();
-            connection = DriverManager.getConnection(url, username, password);
-            return true;
+            if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getDb().getUrl())) {
+                Class.forName(DriverFactory.getDriver(ConfigUtil.getConfiguration().getDb().getUrl()));
+                String url = ConfigUtil.getConfiguration().getDb().getUrl();
+                String username = ConfigUtil.getConfiguration().getDb().getUsername();
+                String password = ConfigUtil.getConfiguration().getDb().getPassword();
+                connection = DriverManager.getConnection(url, username, password);
+                return true;
+            }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {

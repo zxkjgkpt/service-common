@@ -1,4 +1,4 @@
-package com.yfny.utilscommon.generator.task.producer;
+package com.yfny.utilscommon.generator.task.consumer;
 
 import com.yfny.utilscommon.generator.task.base.AbstractTask;
 import com.yfny.utilscommon.generator.utils.ConfigUtil;
@@ -14,28 +14,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 代码生成器生产者（微服务）控制层基类任务
- * Created by jisongZhou on 2019/3/26.
+ * 代码生成器消费者熔断器基类任务
+ * Created by jisongZhou on 2019/3/28.
  **/
-public class ProducerBaseControllerTask extends AbstractTask {
+public class ConsumerBaseHystrixTask extends AbstractTask {
 
-    public ProducerBaseControllerTask(String className) {
+    public ConsumerBaseHystrixTask(String className) {
         super(className);
     }
 
     @Override
     public void run() throws IOException, TemplateException {
-        // 生成BaseController填充数据
+        // 生成BaseHystric填充数据
         Map<String, String> dataMap = new HashMap<>();
         dataMap.put("BasePackageName", ConfigUtil.getConfiguration().getPackageName());
-        dataMap.put("ControllerPackageName", ConfigUtil.getConfiguration().getPath().getController());
+        dataMap.put("HystrixPackageName", ConfigUtil.getConfiguration().getPath().getHystrix());
         dataMap.put("ServicePackageName", ConfigUtil.getConfiguration().getPath().getService());
         dataMap.put("Author", ConfigUtil.getConfiguration().getAuthor());
         dataMap.put("Date", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-        String filePath = FileUtil.getSourcePath() + StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) + StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getController());
-        String fileName = "BaseController.java";
-        // 生成BaseController文件
+        String filePath = FileUtil.getSourcePath() + StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) + StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getHystrix());
+        String fileName = "BaseHystrix.java";
+        // 生成BaseHystric文件
         System.out.println("Generating " + fileName);
-        FileUtil.generateToJava(FreemarketConfigUtils.TYPE_PRODUCER_BASE_CONTROLLER, dataMap, filePath + fileName);
+        FileUtil.generateToJava(FreemarketConfigUtils.TYPE_CONSUMER_BASE_HYSTRIX, dataMap, filePath + fileName);
     }
 }

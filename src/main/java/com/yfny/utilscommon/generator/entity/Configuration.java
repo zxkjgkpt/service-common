@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Configuration implements Serializable {
     private String author;
     private String packageName;
-    private String entityPackageName;
+    private String entityPackageName;//新增属性--实体对象包名
     private Path path;
     private Db db;
 
@@ -99,19 +99,21 @@ public class Configuration implements Serializable {
         private String dao;
         private String entity;
         private String mapper;
-        private String basetest;
-        private String unittest;
+        private String hystrix;//新增属性--熔断器
+        private String basetest;//新增属性--单元测试基类
+        private String unittest;//新增属性--单元测试
 
         public Path() {
         }
 
-        public Path(String controller, String service, String interf, String dao, String entity, String mapper, String basetest, String unittest) {
+        public Path(String controller, String service, String interf, String dao, String entity, String mapper, String hystrix, String basetest, String unittest) {
             this.controller = controller;
             this.service = service;
             this.interf = interf;
             this.dao = dao;
             this.entity = entity;
             this.mapper = mapper;
+            this.hystrix = hystrix;
             this.basetest = basetest;
             this.unittest = unittest;
         }
@@ -162,6 +164,14 @@ public class Configuration implements Serializable {
 
         public void setMapper(String mapper) {
             this.mapper = mapper;
+        }
+
+        public String getHystrix() {
+            return hystrix;
+        }
+
+        public void setHystrix(String hystrix) {
+            this.hystrix = hystrix;
         }
 
         public String getBasetest() {

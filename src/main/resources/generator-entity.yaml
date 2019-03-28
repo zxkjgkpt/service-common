@@ -12,5 +12,6 @@ path:
   interf:
   entity: entity
   mapper:
+  hystrix:
   basetest:
   unittest:

@@ -18,6 +18,7 @@ public abstract class AbstractTask implements Serializable {
     protected String tableName;
     protected String className;
     protected String description;//新增属性--描述
+    protected String applicationName;//新增属性--微服务名称
     protected String parentTableName;
     protected String parentClassName;
     protected String foreignKey;
@@ -36,13 +37,29 @@ public abstract class AbstractTask implements Serializable {
     }
 
     /**
+     *
      * Controller、Service、Dao
      *
      * @param className
+     * @param description
      */
     public AbstractTask(String className, String description) {
         this.className = className;
         this.description = description;
+    }
+
+    /**
+     *
+     * Controller、Service、Dao
+     *
+     * @param className
+     * @param description
+     * @param applicationName
+     */
+    public AbstractTask(String className, String description, String applicationName) {
+        this.className = className;
+        this.description = description;
+        this.applicationName = applicationName;
     }
 
     /**

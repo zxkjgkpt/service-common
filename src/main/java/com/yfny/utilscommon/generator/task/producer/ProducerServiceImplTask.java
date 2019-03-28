@@ -38,7 +38,7 @@ public class ProducerServiceImplTask extends AbstractTask {
         dataMap.put("Description", StringUtil.isBlank(description) ? className : description);
         String filePath = FileUtil.getSourcePath() + StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) + StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getService());
         String fileName = className + "ServiceImpl.java";
-        // 生成Service文件
+        // 生成ServiceImpl文件
         System.out.println("Generating " + fileName);
         FileUtil.generateToJava(FreemarketConfigUtils.TYPE_PRODUCER_SERVICE, dataMap, filePath + fileName);
     }

@@ -18,8 +18,14 @@ public class FreemarketConfigUtils {
     public final static int TYPE_PRODUCER_SERVICE = 3;
     public final static int TYPE_PRODUCER_BASE_CONTROLLER = 4;
     public final static int TYPE_PRODUCER_CONTROLLER = 5;
-    public final static int TYPE_API_BASE_TEST = 6;
-    public final static int TYPE_API_UNIT_TEST = 7;
+    public final static int TYPE_CONSUMER_BASE_SERVICE = 6;
+    public final static int TYPE_CONSUMER_SERVICE = 7;
+    public final static int TYPE_CONSUMER_BASE_HYSTRIX = 8;
+    public final static int TYPE_CONSUMER_HYSTRIX = 9;
+    public final static int TYPE_CONSUMER_BASE_CONTROLLER = 10;
+    public final static int TYPE_CONSUMER_CONTROLLER = 11;
+    public final static int TYPE_API_BASE_TEST = 12;
+    public final static int TYPE_API_UNIT_TEST = 13;
 
     private static Configuration configuration;
 

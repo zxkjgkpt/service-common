@@ -61,6 +61,18 @@ public class FileUtil {
                 return FreemarketConfigUtils.getInstance().getTemplate("ProducerBaseController.ftl");
             case FreemarketConfigUtils.TYPE_PRODUCER_CONTROLLER:
                 return FreemarketConfigUtils.getInstance().getTemplate("ProducerController.ftl");
+            case FreemarketConfigUtils.TYPE_CONSUMER_BASE_SERVICE:
+                return FreemarketConfigUtils.getInstance().getTemplate("ConsumerBaseService.ftl");
+            case FreemarketConfigUtils.TYPE_CONSUMER_SERVICE:
+                return FreemarketConfigUtils.getInstance().getTemplate("ConsumerService.ftl");
+            case FreemarketConfigUtils.TYPE_CONSUMER_BASE_HYSTRIX:
+                return FreemarketConfigUtils.getInstance().getTemplate("ConsumerBaseHystrix.ftl");
+            case FreemarketConfigUtils.TYPE_CONSUMER_HYSTRIX:
+                return FreemarketConfigUtils.getInstance().getTemplate("ConsumerHystrix.ftl");
+            case FreemarketConfigUtils.TYPE_CONSUMER_BASE_CONTROLLER:
+                return FreemarketConfigUtils.getInstance().getTemplate("ConsumerBaseController.ftl");
+            case FreemarketConfigUtils.TYPE_CONSUMER_CONTROLLER:
+                return FreemarketConfigUtils.getInstance().getTemplate("ConsumerController.ftl");
             case FreemarketConfigUtils.TYPE_API_BASE_TEST:
                 return FreemarketConfigUtils.getInstance().getTemplate("APIBaseTest.ftl");
             case FreemarketConfigUtils.TYPE_API_UNIT_TEST:

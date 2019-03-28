@@ -1,8 +1,8 @@
 package ${BasePackageName}${ControllerPackageName};
 
 import ${BaseEntityPackageName}${ClassName}Entity;
-import ${BasePackageName}${ServicePackageName}.BaseServiceImpl;
-import ${BasePackageName}${ServicePackageName}.${ClassName}ServiceImpl;
+import ${BasePackageName}${ServicePackageName}.BaseService;
+import ${BasePackageName}${ServicePackageName}.${ClassName}Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.*;
 public class ${ClassName}Controller extends BaseController<${ClassName}Entity> {
 
     @Autowired
-    private ${ClassName}ServiceImpl ${EntityName}Service;
+    private ${ClassName}Service ${EntityName}Service;
 
     @Override
-    public BaseServiceImpl<${ClassName}Entity> getBaseService() {
+    public BaseService<${ClassName}Entity> getBaseService() {
         return this.${EntityName}Service;
     }
 

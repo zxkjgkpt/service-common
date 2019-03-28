@@ -11,5 +11,6 @@ path:
   interf: service
   entity: entity
   mapper: mapper
+  hystrix: fallback
   basetest: base
   unittest: unit

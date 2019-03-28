@@ -1,22 +1,22 @@
 package ${BasePackageName}${ControllerPackageName};
 
-import ${BasePackageName}${ServicePackageName}.BaseServiceImpl;
+import ${BasePackageName}${ServicePackageName}.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
- * 微服务通用Controller
+ * 消费者通用Controller
  * Author ${Author}
  * Date  ${Date}
  */
-public abstract class BaseController<T> {
+public class BaseController<T> {
 
     @Autowired
-    private BaseServiceImpl<T> baseService;
+    private BaseService<T> baseService;
 
-    public BaseServiceImpl<T> getBaseService() {
+    public BaseService<T> getBaseService() {
         return this.baseService;
     }
 

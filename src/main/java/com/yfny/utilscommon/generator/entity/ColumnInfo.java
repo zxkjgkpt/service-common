@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class ColumnInfo implements Serializable {
     private String columnName; // 列名
     private int type; // 类型代码
-    private String typeName; //类型名称
+    private String typeName; //新增属性--类型名称
     private String propertyName; // 属性名
     private boolean isPrimaryKey; // 是否主键
 

@@ -33,7 +33,7 @@ public class ProducerBaseServiceImplTask extends AbstractTask {
         dataMap.put("Date", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         String filePath = FileUtil.getSourcePath() + StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) + StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getService());
         String fileName = "BaseServiceImpl.java";
-        // 生成Service文件
+        // 生成BaseServiceImpl文件
         System.out.println("Generating " + fileName);
         FileUtil.generateToJava(FreemarketConfigUtils.TYPE_PRODUCER_BASE_SERVICE, dataMap, filePath + fileName);
     }

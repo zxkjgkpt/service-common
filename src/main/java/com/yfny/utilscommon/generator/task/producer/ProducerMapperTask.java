@@ -37,7 +37,7 @@ public class ProducerMapperTask extends AbstractTask {
         dataMap.put("Description", StringUtil.isBlank(description) ? className : description);
         String filePath = FileUtil.getSourcePath() + StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) + StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getMapper());
         String fileName = className + "Mapper.java";
-        // 生成Service文件
+        // 生成Mapper文件
         System.out.println("Generating " + fileName);
         FileUtil.generateToJava(FreemarketConfigUtils.TYPE_PRODUCER_MAPPER, dataMap, filePath + fileName);
     }

@@ -1,4 +1,4 @@
-package com.yfny.utilscommon.generator.task.producer;
+package com.yfny.utilscommon.generator.task.consumer;
 
 import com.yfny.utilscommon.generator.task.base.AbstractTask;
 import com.yfny.utilscommon.generator.utils.ConfigUtil;
@@ -14,12 +14,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 代码生成器生产者（微服务）控制层基类任务
- * Created by jisongZhou on 2019/3/26.
+ * 代码生成器消费者控制层基类任务
+ * Created by jisongZhou on 2019/3/27.
  **/
-public class ProducerBaseControllerTask extends AbstractTask {
+public class ConsumerBaseControllerTask extends AbstractTask {
 
-    public ProducerBaseControllerTask(String className) {
+    public ConsumerBaseControllerTask(String className) {
         super(className);
     }
 
@@ -36,6 +36,6 @@ public class ProducerBaseControllerTask extends AbstractTask {
         String fileName = "BaseController.java";
         // 生成BaseController文件
         System.out.println("Generating " + fileName);
-        FileUtil.generateToJava(FreemarketConfigUtils.TYPE_PRODUCER_BASE_CONTROLLER, dataMap, filePath + fileName);
+        FileUtil.generateToJava(FreemarketConfigUtils.TYPE_CONSUMER_BASE_CONTROLLER, dataMap, filePath + fileName);
     }
 }

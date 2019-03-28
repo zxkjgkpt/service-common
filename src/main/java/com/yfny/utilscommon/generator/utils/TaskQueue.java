@@ -5,6 +5,7 @@ import com.yfny.utilscommon.generator.task.APIBaseTestTask;
 import com.yfny.utilscommon.generator.task.APIUnitTestTask;
 import com.yfny.utilscommon.generator.task.EntityTask;
 import com.yfny.utilscommon.generator.task.base.AbstractTask;
+import com.yfny.utilscommon.generator.task.consumer.*;
 import com.yfny.utilscommon.generator.task.producer.*;
 
 import java.util.LinkedList;
@@ -17,7 +18,7 @@ import java.util.List;
 public class TaskQueue {
 
     private LinkedList<AbstractTask> taskQueue = new LinkedList<>();
-    
+
     /******************************************************此下方法为改造新增开始*****************************************************************/
 
     public void initSingleTasks(String className, String tableName, String description, List<ColumnInfo> tableInfos) {
@@ -27,11 +28,11 @@ public class TaskQueue {
     }
 
     private void initProducerBaseTasks(String className) {
-        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getController())) {
-            taskQueue.add(new ProducerBaseControllerTask(className));
-        }
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getService())) {
             taskQueue.add(new ProducerBaseServiceImplTask(className));
+        }
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getController())) {
+            taskQueue.add(new ProducerBaseControllerTask(className));
         }
     }
 
@@ -39,14 +40,41 @@ public class TaskQueue {
         if (isFirst) {
             initProducerBaseTasks(className);
         }
-        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getController())) {
-            taskQueue.add(new ProducerControllerTask(className, description));
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getMapper())) {
+            taskQueue.add(new ProducerMapperTask(className, description));
         }
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getService())) {
             taskQueue.add(new ProducerServiceImplTask(className, description));
         }
-        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getMapper())) {
-            taskQueue.add(new ProducerMapperTask(className, description));
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getController())) {
+            taskQueue.add(new ProducerControllerTask(className, description));
+        }
+    }
+
+    private void initConsumerBaseTasks(String className) {
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getService())) {
+            taskQueue.add(new ConsumerBaseServiceTask(className));
+        }
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getHystrix())) {
+            taskQueue.add(new ConsumerBaseHystrixTask(className));
+        }
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getController())) {
+            taskQueue.add(new ConsumerBaseControllerTask(className));
+        }
+    }
+
+    public void initConsumerTasks(String className, String description, String applicationName, boolean isFirst) {
+        if (isFirst) {
+            initConsumerBaseTasks(className);
+        }
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getService())) {
+            taskQueue.add(new ConsumerServiceTask(className, description, applicationName));
+        }
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getHystrix())) {
+            taskQueue.add(new ConsumerHystrixTask(className, description));
+        }
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getController())) {
+            taskQueue.add(new ConsumerControllerTask(className, description));
         }
     }
 
