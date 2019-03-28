@@ -24,8 +24,9 @@ public class FreemarketConfigUtils {
     public final static int TYPE_CONSUMER_HYSTRIX = 9;
     public final static int TYPE_CONSUMER_BASE_CONTROLLER = 10;
     public final static int TYPE_CONSUMER_CONTROLLER = 11;
-    public final static int TYPE_API_BASE_TEST = 12;
-    public final static int TYPE_API_UNIT_TEST = 13;
+    public final static int TYPE_EXCEPTION_HANDLER = 12;
+    public final static int TYPE_API_BASE_TEST = 13;
+    public final static int TYPE_API_UNIT_TEST = 14;
 
     private static Configuration configuration;
 

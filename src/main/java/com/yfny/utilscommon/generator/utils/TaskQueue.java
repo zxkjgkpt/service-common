@@ -4,6 +4,7 @@ import com.yfny.utilscommon.generator.entity.ColumnInfo;
 import com.yfny.utilscommon.generator.task.APIBaseTestTask;
 import com.yfny.utilscommon.generator.task.APIUnitTestTask;
 import com.yfny.utilscommon.generator.task.EntityTask;
+import com.yfny.utilscommon.generator.task.ExceptionHandlerTask;
 import com.yfny.utilscommon.generator.task.base.AbstractTask;
 import com.yfny.utilscommon.generator.task.consumer.*;
 import com.yfny.utilscommon.generator.task.producer.*;
@@ -34,6 +35,7 @@ public class TaskQueue {
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getController())) {
             taskQueue.add(new ProducerBaseControllerTask(className));
         }
+        taskQueue.add(new ExceptionHandlerTask(className));
     }
 
     public void initProducerTasks(String className, String description, boolean isFirst) {
@@ -61,6 +63,7 @@ public class TaskQueue {
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getController())) {
             taskQueue.add(new ConsumerBaseControllerTask(className));
         }
+        taskQueue.add(new ExceptionHandlerTask(className));
     }
 
     public void initConsumerTasks(String className, String description, String applicationName, boolean isFirst) {

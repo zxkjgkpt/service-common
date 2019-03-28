@@ -73,6 +73,8 @@ public class FileUtil {
                 return FreemarketConfigUtils.getInstance().getTemplate("ConsumerBaseController.ftl");
             case FreemarketConfigUtils.TYPE_CONSUMER_CONTROLLER:
                 return FreemarketConfigUtils.getInstance().getTemplate("ConsumerController.ftl");
+            case FreemarketConfigUtils.TYPE_EXCEPTION_HANDLER:
+                return FreemarketConfigUtils.getInstance().getTemplate("ExceptionHandler.ftl");
             case FreemarketConfigUtils.TYPE_API_BASE_TEST:
                 return FreemarketConfigUtils.getInstance().getTemplate("APIBaseTest.ftl");
             case FreemarketConfigUtils.TYPE_API_UNIT_TEST:
