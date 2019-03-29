@@ -1,9 +1,6 @@
 package com.yfny.utilscommon.generator.application;
 
-import com.yfny.utilscommon.generator.invoker.Many2ManyInvoker;
-import com.yfny.utilscommon.generator.invoker.One2ManyInvoker;
-import com.yfny.utilscommon.generator.invoker.SingleInvoker;
-import com.yfny.utilscommon.generator.invoker.TestInvoker;
+import com.yfny.utilscommon.generator.invoker.*;
 import com.yfny.utilscommon.generator.invoker.base.Invoker;
 
 /**
@@ -13,7 +10,7 @@ import com.yfny.utilscommon.generator.invoker.base.Invoker;
 public class Main {
 
     public static void main(String[] args) {
-        test();
+        singleInvokerTest();
     }
 
     public static void many2many() {
@@ -40,15 +37,35 @@ public class Main {
         invoker.execute();
     }
 
-    public static void single() {
+    public static void singleInvokerTest() {
         Invoker invoker = new SingleInvoker.Builder()
                 .setTableName("user")
                 .setClassName("User")
+                .setDescription("用户")
                 .build();
         invoker.execute();
     }
 
-    public static void test() {
+    public static void producerInvokerTest() {
+        Invoker invoker = new ProducerInvoker.Builder()
+                .setClassName("User")
+                .setDescription("用户")
+                .setFirst(true)
+                .build();
+        invoker.execute();
+    }
+
+    public void consumerInvokerTest() {
+        Invoker invoker = new ConsumerInvoker.Builder()
+                .setClassName("User")
+                .setDescription("用户")
+                .setApplicationName("service-user")
+                .setFirst(true)
+                .build();
+        invoker.execute();
+    }
+
+    public static void apiTestInvokerTest() {
         Invoker invoker = new TestInvoker.Builder()
                 .build();
         invoker.execute();
