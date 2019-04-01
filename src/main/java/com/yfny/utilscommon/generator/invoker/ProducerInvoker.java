@@ -17,17 +17,22 @@ public class ProducerInvoker extends AbstractInvoker {
 
     @Override
     protected void getTableInfos() throws SQLException {
-
+        tableInfos = connectionUtil.getMetaData(tableName);
     }
 
     @Override
     protected void initTasks() {
-        taskQueue.initProducerTasks(className, description, isFirst);
+        taskQueue.initProducerTasks(className, tableName, description, tableInfos, isFirst);
     }
 
     public static class Builder extends AbstractBuilder {
 
         private ProducerInvoker invoker = new ProducerInvoker();
+
+        public Builder setTableName(String tableName) {
+            invoker.setTableName(tableName);
+            return this;
+        }
 
         public Builder setClassName(String className) {
             invoker.setClassName(className);

@@ -143,7 +143,7 @@ public abstract class BaseServiceImpl<T> {
      */
     public List<T> findList(T entity, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        return getBaseMapper().select(entity);
+        return this.findList(entity);
     }
 
     /**
@@ -162,7 +162,7 @@ public abstract class BaseServiceImpl<T> {
      */
     public List<T> findAllList(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        return getBaseMapper().selectAll();
+        return this.findAllList();
     }
 
 }

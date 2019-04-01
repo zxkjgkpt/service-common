@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.*;
  * Date  ${Date}
  */
 @RestController
-@RequestMapping(value = "/${EntityName}")
+@RequestMapping(value = "/${ClassName?uncap_first}")
 public class ${ClassName}Controller extends BaseController<${ClassName}Entity> {
 
     @Autowired
-    private ${ClassName}Service ${EntityName}Service;
+    private ${ClassName}Service ${ClassName?uncap_first}Service;
 
     @Override
     public BaseService<${ClassName}Entity> getBaseService() {
-        return this.${EntityName}Service;
+        return this.${ClassName?uncap_first}Service;
     }
 
 }

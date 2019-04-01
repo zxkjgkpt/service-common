@@ -34,7 +34,6 @@ public class ConsumerControllerTask extends AbstractTask {
         dataMap.put("Author", ConfigUtil.getConfiguration().getAuthor());
         dataMap.put("Date", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         dataMap.put("ClassName", className);
-        dataMap.put("EntityName", StringUtil.firstToLowerCase(className));
         dataMap.put("Description", StringUtil.isBlank(description) ? className : description);
         String filePath = FileUtil.getSourcePath() + StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) + StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getController());
         String fileName = className + "Controller.java";

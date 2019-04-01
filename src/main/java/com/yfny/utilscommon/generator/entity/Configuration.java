@@ -95,10 +95,9 @@ public class Configuration implements Serializable {
     public static class Path {
         private String controller;
         private String service;
-        private String interf;
-        private String dao;
         private String entity;
         private String mapper;
+        private String sqlbuilder;//新增属性--sql语句构造器
         private String hystrix;//新增属性--熔断器
         private String basetest;//新增属性--单元测试基类
         private String unittest;//新增属性--单元测试
@@ -106,13 +105,12 @@ public class Configuration implements Serializable {
         public Path() {
         }
 
-        public Path(String controller, String service, String interf, String dao, String entity, String mapper, String hystrix, String basetest, String unittest) {
+        public Path(String controller, String service, String entity, String mapper, String sqlbuilder, String hystrix, String basetest, String unittest) {
             this.controller = controller;
             this.service = service;
-            this.interf = interf;
-            this.dao = dao;
             this.entity = entity;
             this.mapper = mapper;
+            this.sqlbuilder = sqlbuilder;
             this.hystrix = hystrix;
             this.basetest = basetest;
             this.unittest = unittest;
@@ -134,22 +132,6 @@ public class Configuration implements Serializable {
             this.service = service;
         }
 
-        public String getInterf() {
-            return interf;
-        }
-
-        public void setInterf(String interf) {
-            this.interf = interf;
-        }
-
-        public String getDao() {
-            return dao == null ? "" : dao;
-        }
-
-        public void setDao(String dao) {
-            this.dao = dao;
-        }
-
         public String getEntity() {
             return entity == null ? "" : entity;
         }
@@ -164,6 +146,14 @@ public class Configuration implements Serializable {
 
         public void setMapper(String mapper) {
             this.mapper = mapper;
+        }
+
+        public String getSqlbuilder() {
+            return sqlbuilder == null ? "" : sqlbuilder;
+        }
+
+        public void setSqlbuilder(String sqlbuilder) {
+            this.sqlbuilder = sqlbuilder;
         }
 
         public String getHystrix() {

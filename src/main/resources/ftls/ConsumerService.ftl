@@ -12,7 +12,7 @@ import java.util.List;
  * Author ${Author}
  * Date  ${Date}
  */
-@FeignClient(value = "${ApplicationName}", path = "/${EntityName}", fallback = ${ClassName}Hystrix.class)
+@FeignClient(value = "${ApplicationName}", path = "/${ClassName?uncap_first}", fallback = ${ClassName}Hystrix.class)
 public interface ${ClassName}Service extends BaseService<${ClassName}Entity> {
 
 }

@@ -9,9 +9,9 @@ entityPackageName:
 path:
   controller:
   service:
-  interf:
   entity: entity
   mapper:
+  sqlbuilder:
   hystrix:
   basetest:
   unittest:

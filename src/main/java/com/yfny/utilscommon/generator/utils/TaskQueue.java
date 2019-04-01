@@ -38,9 +38,12 @@ public class TaskQueue {
         taskQueue.add(new ExceptionHandlerTask(className));
     }
 
-    public void initProducerTasks(String className, String description, boolean isFirst) {
+    public void initProducerTasks(String className, String tableName, String description, List<ColumnInfo> tableInfos, boolean isFirst) {
         if (isFirst) {
             initProducerBaseTasks(className);
+        }
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getSqlbuilder())) {
+            taskQueue.add(new ProducerSqlBuilderTask(className, tableName, description, tableInfos));
         }
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getMapper())) {
             taskQueue.add(new ProducerMapperTask(className, description));

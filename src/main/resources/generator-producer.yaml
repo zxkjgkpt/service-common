@@ -9,9 +9,9 @@ entityPackageName: com.yfny.corepojo.entity.demo
 path:
   controller: controller
   service: service
-  interf:
   entity:
   mapper: mapper
+  sqlbuilder: sqlbuilder
   hystrix:
   basetest: base
   unittest: unit

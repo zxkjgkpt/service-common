@@ -6,21 +6,59 @@ import ${BasePackageName}${ServicePackageName}.${ClassName}ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * ${Description}Controller
  * Author ${Author}
  * Date  ${Date}
  */
 @RestController
-@RequestMapping(value = "/${EntityName}")
+@RequestMapping(value = "/${ClassName?uncap_first}")
 public class ${ClassName}Controller extends BaseController<${ClassName}Entity> {
 
     @Autowired
-    private ${ClassName}ServiceImpl ${EntityName}Service;
+    private ${ClassName}ServiceImpl ${ClassName?uncap_first}Service;
 
     @Override
     public BaseServiceImpl<${ClassName}Entity> getBaseService() {
-        return this.${EntityName}Service;
+        return this.${ClassName?uncap_first}Service;
+    }
+
+    /**
+     * 根据实体中的属性值进行查询，查询条件使用等号
+     * @param   ${ClassName?uncap_first}    对象实体
+     * @param   orders    排序字段
+     * @return  对象列表
+     */
+    @PostMapping(value = "/find${ClassName}ByCondition")
+    @ResponseBody
+    public List<${ClassName}Entity> find${ClassName}ByCondition1(${ClassName}Entity ${ClassName?uncap_first}, String... orders) throws Exception {
+        List<${ClassName}Entity> result = ${ClassName?uncap_first}Service.find${ClassName}ByCondition(${ClassName?uncap_first}, orders);
+        if (result == null) {
+            result = new ArrayList<>();
+        }
+        return result;
+    }
+
+    /**
+     * 根据实体中的属性值进行查询，查询条件使用等号，分页返回
+     * @param   ${ClassName?uncap_first}    对象实体
+     * @param   pageNum   页数
+     * @param   pageSize  每页数量
+     * @param   orders    排序字段
+     * @return  对象列表
+     */
+    @PostMapping(value = "/find${ClassName}ByCondition/{pageNum}/{pageSize}")
+    @ResponseBody
+    public List<${ClassName}Entity> find${ClassName}ByCondition2(${ClassName}Entity ${ClassName?uncap_first},
+                @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize, String... orders) throws Exception {
+        List<${ClassName}Entity> result = ${ClassName?uncap_first}Service.find${ClassName}ByCondition(${ClassName?uncap_first}, pageNum, pageSize, orders);
+        if (result == null) {
+            result = new ArrayList<>();
+        }
+        return result;
     }
 
 }

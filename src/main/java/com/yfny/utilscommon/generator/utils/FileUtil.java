@@ -40,6 +40,118 @@ public class FileUtil {
         fos.close();
     }
 
+
+    public static void addToMapper(int type, Object data, String filePath) throws IOException, TemplateException {
+        Template tpl = getTemplate(type); // 获取模板文件
+        File file = new File(filePath);
+        // 填充数据
+        StringWriter writer = new StringWriter();
+        tpl.process(data, writer);
+        String addContents = writer.toString();
+        String fileContents = readFileContent(filePath, 0);
+        long content_length = fileContents.length();
+        long file_length = file.length();
+        //System.out.println("readLenth: " + fileContents.length());
+        long position = fileContents.lastIndexOf("}") + (file_length - content_length);
+        //System.out.println("position: " + position);
+        addContainsToFile(filePath, position, addContents);
+    }
+
+    /**
+     * 对一个文件的任意位置可以插入任何内容
+     *
+     * @param filePath 文件路径
+     * @param position 追加内容添加位置
+     * @param contents 追加内容
+     * @throws IOException
+     */
+    public static void addContainsToFile(String filePath, long position, String contents) throws IOException {
+        //1、参数校验
+        File file = new File(filePath);
+        System.out.println(file);
+        //判断文件是否存在
+        if (!(file.exists() && file.isFile())) {
+            System.out.println("文件不存在  ~ ");
+            return;
+        }
+        //判断position是否合法
+        if ((position < 0) || (position > file.length())) {
+            System.out.println("position不合法 ~ ");
+            return;
+        }
+
+        //2、创建临时文件
+        File tempFile = File.createTempFile("sss", ".temp", new File("/"));
+        //File tempFile = new File("d:/wwwww.txt");
+        //3、用文件输入流、文件输出流对文件进行操作
+        FileOutputStream outputStream = new FileOutputStream(tempFile);
+        FileInputStream inputStream = new FileInputStream(tempFile);
+        //在退出JVM退出时自动删除
+        tempFile.deleteOnExit();
+
+        //4、创建RandomAccessFile流
+        RandomAccessFile rw = new RandomAccessFile(file, "rw");
+        //System.out.println(rw.getFilePointer());
+        //文件指定位置到 position
+        rw.seek(position);
+        //System.out.println(rw.getFilePointer());
+
+        int tmp;
+        //5、将position位置后的内容写入临时文件
+        while ((tmp = rw.read()) != -1) {
+            outputStream.write(tmp);
+        }
+        //6、将追加内容 contents 写入 position 位置
+        rw.seek(position);
+        rw.write(contents.getBytes());
+
+        //7、将临时文件写回文件，并将创建的流关闭
+        while ((tmp = inputStream.read()) != -1) {
+            rw.write(tmp);
+        }
+        rw.close();
+        outputStream.close();
+        inputStream.close();
+    }
+
+
+    /**
+     * 读取文件内容
+     *
+     * @param filePath 文件路径
+     * @param position 指针位置
+     **/
+    public static String readFileContent(String filePath, int position) {
+        String content = "";
+        try {
+            //RandomAccessFile raf=new RandomAccessFile(new File("D:\\3\\test.txt"), "r");
+            /**
+             * model各个参数详解
+             * r 代表以只读方式打开指定文件
+             * rw 以读写方式打开指定文件
+             * rws 读写方式打开，并对内容或元数据都同步写入底层存储设备
+             * rwd 读写方式打开，对文件内容的更新同步更新至底层存储设备
+             *
+             * **/
+            RandomAccessFile raf = new RandomAccessFile(filePath, "r");
+            //获取RandomAccessFile对象文件指针的位置，初始位置是0
+            System.out.println("RandomAccessFile文件指针的初始位置:" + raf.getFilePointer());
+            raf.seek(position);//移动文件指针位置
+            byte[] buff = new byte[1024];
+            //用于保存实际读取的字节数
+            int hasRead = 0;
+            //循环读取
+            while ((hasRead = raf.read(buff)) > 0) {
+                //打印读取的内容,并将字节转为字符串输入
+                content = content + new String(buff, 0, hasRead, "utf-8");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(content);
+        return content;
+    }
+
     /**
      * 获取模板
      *
@@ -51,6 +163,8 @@ public class FileUtil {
         switch (type) {
             case FreemarketConfigUtils.TYPE_ENTITY:
                 return FreemarketConfigUtils.getInstance().getTemplate("Entity.ftl");
+            case FreemarketConfigUtils.TYPE_PRODUCER_SQL_BUILDER:
+                return FreemarketConfigUtils.getInstance().getTemplate("ProducerSqlBuilder.ftl");
             case FreemarketConfigUtils.TYPE_PRODUCER_MAPPER:
                 return FreemarketConfigUtils.getInstance().getTemplate("ProducerMapper.ftl");
             case FreemarketConfigUtils.TYPE_PRODUCER_BASE_SERVICE:
