@@ -1,5 +1,6 @@
 package ${BasePackageName}base;
 
+import javax.persistence.Transient;
 import java.io.Serializable;
 
 /**
@@ -9,14 +10,19 @@ import java.io.Serializable;
  */
 public class BaseEntity implements Serializable {
 
+    @Transient
     private Integer pageNum;//当前页数
 
+    @Transient
     private Integer pageSize;//每页数量
 
+    @Transient
     private Integer pageCount;//总页数
 
+    @Transient
     private Long total;//总数
 
+    @Transient
     private String[] orders;//排序字段
 
     public BaseEntity() {
