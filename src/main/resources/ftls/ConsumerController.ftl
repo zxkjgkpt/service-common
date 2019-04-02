@@ -33,7 +33,7 @@ public class ${ClassName}Controller extends BaseController<${ClassName}Entity> {
      */
     @PostMapping(value = "/find${ClassName}ByCondition")
     @ResponseBody
-    public InvokeResult find${ClassName}ByCondition1(${ClassName}Entity ${ClassName?uncap_first}) throws Exception {
+    public InvokeResult find${ClassName}ByCondition1(@RequestBody ${ClassName}Entity ${ClassName?uncap_first}) throws Exception {
         List<${ClassName}Entity> result = ${ClassName?uncap_first}Service.find${ClassName}ByCondition(${ClassName?uncap_first});
         if (result != null) {
             return InvokeResult.success(result);
@@ -52,7 +52,7 @@ public class ${ClassName}Controller extends BaseController<${ClassName}Entity> {
      */
     @PostMapping(value = "/find${ClassName}ByCondition/{pageNum}/{pageSize}")
     @ResponseBody
-    public InvokeResult find${ClassName}ByCondition2(${ClassName}Entity ${ClassName?uncap_first},
+    public InvokeResult find${ClassName}ByCondition2(@RequestBody ${ClassName}Entity ${ClassName?uncap_first},
                 @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
         List<${ClassName}Entity> result = ${ClassName?uncap_first}Service.find${ClassName}ByCondition(${ClassName?uncap_first}, pageNum, pageSize);
         if (result != null) {

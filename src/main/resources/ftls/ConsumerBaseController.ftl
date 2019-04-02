@@ -130,7 +130,7 @@ public class BaseController<T> {
      */
     @PostMapping(value = "/selectOne")
     @ResponseBody
-    public InvokeResult selectOne(T entity) throws Exception {
+    public InvokeResult selectOne(@RequestBody T entity) throws Exception {
         T result = getBaseService().selectOne(entity);
         if (result != null) {
             return InvokeResult.success(result);
@@ -164,7 +164,7 @@ public class BaseController<T> {
      */
     @PostMapping(value = "/selectCount")
     @ResponseBody
-    public InvokeResult selectCount(T entity) throws Exception {
+    public InvokeResult selectCount(@RequestBody T entity) throws Exception {
         int result = getBaseService().selectCount(entity);
         if (result >= 0) {
             return InvokeResult.success("20003", result);
@@ -181,7 +181,7 @@ public class BaseController<T> {
      */
     @PostMapping(value = "/findList")
     @ResponseBody
-    public InvokeResult findList1(T entity) throws Exception {
+    public InvokeResult findList1(@RequestBody T entity) throws Exception {
         List<T> result = getBaseService().findList(entity);
         if (result != null) {
             return InvokeResult.success(result);
@@ -200,7 +200,7 @@ public class BaseController<T> {
      */
     @PostMapping(value = "/findList/{pageNum}/{pageSize}")
     @ResponseBody
-    public InvokeResult findList2(T entity, @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
+    public InvokeResult findList2(@RequestBody T entity, @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
         List<T> result = getBaseService().findList(entity, pageNum, pageSize);
         if (result != null) {
             return InvokeResult.success(result);
