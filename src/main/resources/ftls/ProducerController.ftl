@@ -29,13 +29,12 @@ public class ${ClassName}Controller extends BaseController<${ClassName}Entity> {
     /**
      * 根据实体中的属性值进行查询，查询条件使用等号
      * @param   ${ClassName?uncap_first}    对象实体
-     * @param   orders    排序字段
-     * @return  对象列表
+     * @return  返回对象列表为查询结果
      */
     @PostMapping(value = "/find${ClassName}ByCondition")
     @ResponseBody
-    public List<${ClassName}Entity> find${ClassName}ByCondition1(${ClassName}Entity ${ClassName?uncap_first}, String... orders) throws Exception {
-        List<${ClassName}Entity> result = ${ClassName?uncap_first}Service.find${ClassName}ByCondition(${ClassName?uncap_first}, orders);
+    public List<${ClassName}Entity> find${ClassName}ByCondition1(${ClassName}Entity ${ClassName?uncap_first}) throws Exception {
+        List<${ClassName}Entity> result = ${ClassName?uncap_first}Service.find${ClassName}ByCondition(${ClassName?uncap_first});
         if (result == null) {
             result = new ArrayList<>();
         }
@@ -47,14 +46,13 @@ public class ${ClassName}Controller extends BaseController<${ClassName}Entity> {
      * @param   ${ClassName?uncap_first}    对象实体
      * @param   pageNum   页数
      * @param   pageSize  每页数量
-     * @param   orders    排序字段
-     * @return  对象列表
+     * @return  返回对象列表为查询结果
      */
     @PostMapping(value = "/find${ClassName}ByCondition/{pageNum}/{pageSize}")
     @ResponseBody
     public List<${ClassName}Entity> find${ClassName}ByCondition2(${ClassName}Entity ${ClassName?uncap_first},
-                @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize, String... orders) throws Exception {
-        List<${ClassName}Entity> result = ${ClassName?uncap_first}Service.find${ClassName}ByCondition(${ClassName?uncap_first}, pageNum, pageSize, orders);
+                @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
+        List<${ClassName}Entity> result = ${ClassName?uncap_first}Service.find${ClassName}ByCondition(${ClassName?uncap_first}, pageNum, pageSize);
         if (result == null) {
             result = new ArrayList<>();
         }

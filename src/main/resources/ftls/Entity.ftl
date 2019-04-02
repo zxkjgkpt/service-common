@@ -1,9 +1,10 @@
 package ${BasePackageName}${EntityPackageName};
 
+import ${BasePackageName}base.BaseEntity;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
 import java.util.List;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -16,7 +17,7 @@ import java.sql.Timestamp;
  * Date  ${Date}
  */
 @Table(name = "${TableName}")
-public class ${ClassName}Entity implements Serializable {
+public class ${ClassName}Entity extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 

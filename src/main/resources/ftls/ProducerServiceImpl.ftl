@@ -28,11 +28,10 @@ public class ${ClassName}ServiceImpl extends BaseServiceImpl<${ClassName}Entity>
     /**
      * 根据实体中的属性值进行查询，查询条件使用等号
      * @param   ${ClassName?uncap_first}    对象实体
-     * @param   orders    排序字段
-     * @return  对象列表
+     * @return  返回对象列表为查询结果
      */
-    public List<${ClassName}Entity> find${ClassName}ByCondition(${ClassName}Entity ${ClassName?uncap_first}, String[] orders) {
-        return ${ClassName?uncap_first}Mapper.find${ClassName}ByCondition(${ClassName?uncap_first}, orders);
+    public List<${ClassName}Entity> find${ClassName}ByCondition(${ClassName}Entity ${ClassName?uncap_first}) {
+        return ${ClassName?uncap_first}Mapper.find${ClassName}ByCondition(${ClassName?uncap_first});
     }
 
     /**
@@ -40,12 +39,11 @@ public class ${ClassName}ServiceImpl extends BaseServiceImpl<${ClassName}Entity>
      * @param   ${ClassName?uncap_first}    对象实体
      * @param   pageNum   页数
      * @param   pageSize  每页数量
-     * @param   orders    排序字段
      * @return  对象列表
      */
-    public List<${ClassName}Entity> find${ClassName}ByCondition(${ClassName}Entity ${ClassName?uncap_first}, int pageNum, int pageSize, String[] orders) {
+    public List<${ClassName}Entity> find${ClassName}ByCondition(${ClassName}Entity ${ClassName?uncap_first}, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        return ${ClassName?uncap_first}Mapper.find${ClassName}ByCondition(${ClassName?uncap_first}, orders);
+        return ${ClassName?uncap_first}Mapper.find${ClassName}ByCondition(${ClassName?uncap_first});
     }
 
 }

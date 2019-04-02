@@ -161,6 +161,8 @@ public class FileUtil {
      */
     private static Template getTemplate(int type) throws IOException {
         switch (type) {
+            case FreemarketConfigUtils.TYPE_BASE_ENTITY:
+                return FreemarketConfigUtils.getInstance().getTemplate("BaseEntity.ftl");
             case FreemarketConfigUtils.TYPE_ENTITY:
                 return FreemarketConfigUtils.getInstance().getTemplate("Entity.ftl");
             case FreemarketConfigUtils.TYPE_PRODUCER_SQL_BUILDER:

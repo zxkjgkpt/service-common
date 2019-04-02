@@ -14,10 +14,9 @@ public class ${ClassName}SqlBuilder {
     /**
      * 根据实体中的属性值进行查询，查询条件使用等号
      * @param   ${ClassName?uncap_first}    对象实体
-     * @param   orders   排序字段
      * @return  Sql语句
      */
-    public String buildFind${ClassName}ByCondition(final ${ClassName}Entity ${ClassName?uncap_first}, final String[] orders) {
+    public String buildFind${ClassName}ByCondition(final ${ClassName}Entity ${ClassName?uncap_first}) {
         return new SQL(){{
             SELECT("*");
             FROM("${TableName}");
@@ -32,8 +31,8 @@ public class ${ClassName}SqlBuilder {
             }
             </#if>
         </#list>
-            if (orders != null && orders.length > 0) {
-                ORDER_BY(orders);
+            if (${ClassName?uncap_first}.getOrders() != null && ${ClassName?uncap_first}.getOrders().length > 0) {
+                ORDER_BY(${ClassName?uncap_first}.getOrders());
             }
         }}.toString();
     }

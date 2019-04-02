@@ -1,10 +1,7 @@
 package com.yfny.utilscommon.generator.utils;
 
 import com.yfny.utilscommon.generator.entity.ColumnInfo;
-import com.yfny.utilscommon.generator.task.APIBaseTestTask;
-import com.yfny.utilscommon.generator.task.APIUnitTestTask;
-import com.yfny.utilscommon.generator.task.EntityTask;
-import com.yfny.utilscommon.generator.task.ExceptionHandlerTask;
+import com.yfny.utilscommon.generator.task.*;
 import com.yfny.utilscommon.generator.task.base.AbstractTask;
 import com.yfny.utilscommon.generator.task.consumer.*;
 import com.yfny.utilscommon.generator.task.producer.*;
@@ -22,7 +19,10 @@ public class TaskQueue {
 
     /******************************************************此下方法为改造新增开始*****************************************************************/
 
-    public void initSingleTasks(String className, String tableName, String description, List<ColumnInfo> tableInfos) {
+    public void initSingleTasks(String className, String tableName, String description, List<ColumnInfo> tableInfos, boolean isFirst) {
+        if (isFirst) {
+            taskQueue.add(new BaseEntityTask(className));
+        }
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getEntity())) {
             taskQueue.add(new EntityTask(className, tableName, description, tableInfos));
         }

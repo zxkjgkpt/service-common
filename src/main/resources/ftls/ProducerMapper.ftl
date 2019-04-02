@@ -18,10 +18,9 @@ public interface ${ClassName}Mapper extends BaseMapper<${ClassName}Entity> {
     /**
      * 根据实体中的属性值进行查询，查询条件使用等号
      * @param   ${ClassName?uncap_first}    对象实体
-     * @param   orders   排序字段
-     * @return  对象列表
+     * @return  返回对象列表为查询结果
      */
     @SelectProvider(type = ${ClassName}SqlBuilder.class, method = "buildFind${ClassName}ByCondition")
-    List<${ClassName}Entity> find${ClassName}ByCondition(@Param("${ClassName?uncap_first}") ${ClassName}Entity ${ClassName?uncap_first}, @Param("orders") String[] orders);
+    List<${ClassName}Entity> find${ClassName}ByCondition(@Param("${ClassName?uncap_first}") ${ClassName}Entity ${ClassName?uncap_first});
 
 }

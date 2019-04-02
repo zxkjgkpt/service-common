@@ -27,7 +27,7 @@ public class ProducerSqlBuilderTask extends AbstractTask {
 
     @Override
     public void run() throws IOException, TemplateException {
-        // 生成Mapper填充数据
+        // 生成SqlBuilder填充数据
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("BasePackageName", ConfigUtil.getConfiguration().getPackageName());
         dataMap.put("SqlBuilderPackageName", ConfigUtil.getConfiguration().getPath().getSqlbuilder());
@@ -40,7 +40,7 @@ public class ProducerSqlBuilderTask extends AbstractTask {
         dataMap.put("Description", StringUtil.isBlank(description) ? className : description);
         String filePath = FileUtil.getSourcePath() + StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) + StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getSqlbuilder());
         String fileName = className + "SqlBuilder.java";
-        // 生成Mapper文件
+        // 生成SqlBuilder文件
         System.out.println("Generating " + fileName);
         FileUtil.generateToJava(FreemarketConfigUtils.TYPE_PRODUCER_SQL_BUILDER, dataMap, filePath + fileName);
     }
