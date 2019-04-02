@@ -30,6 +30,7 @@ public class ProducerBaseControllerTask extends AbstractTask {
         dataMap.put("BasePackageName", ConfigUtil.getConfiguration().getPackageName());
         dataMap.put("ControllerPackageName", ConfigUtil.getConfiguration().getPath().getController());
         dataMap.put("ServicePackageName", ConfigUtil.getConfiguration().getPath().getService());
+        dataMap.put("BaseEntityPackageName", ConfigUtil.getConfiguration().getEntityPackageName());
         dataMap.put("Author", ConfigUtil.getConfiguration().getAuthor());
         dataMap.put("Date", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         String filePath = FileUtil.getSourcePath() + StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) + StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getController());

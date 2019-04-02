@@ -1,6 +1,6 @@
 package ${BasePackageName}${ControllerPackageName};
 
-import ${BaseEntityPackageName}${ClassName}Entity;
+import ${BaseEntityPackageName}${EntityPackageName}.${ClassName}Entity;
 import ${BasePackageName}${ServicePackageName}.BaseServiceImpl;
 import ${BasePackageName}${ServicePackageName}.${ClassName}ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +28,13 @@ public class ${ClassName}Controller extends BaseController<${ClassName}Entity> {
 
     /**
      * 根据实体中的属性值进行查询，查询条件使用等号
+     *
      * @param   ${ClassName?uncap_first}    对象实体
      * @return  返回对象列表为查询结果
      */
     @PostMapping(value = "/find${ClassName}ByCondition")
     @ResponseBody
-    public List<${ClassName}Entity> find${ClassName}ByCondition1(${ClassName}Entity ${ClassName?uncap_first}) throws Exception {
+    public List<${ClassName}Entity> find${ClassName}ByCondition1(@RequestBody ${ClassName}Entity ${ClassName?uncap_first}) throws Exception {
         List<${ClassName}Entity> result = ${ClassName?uncap_first}Service.find${ClassName}ByCondition(${ClassName?uncap_first});
         if (result == null) {
             result = new ArrayList<>();
@@ -43,6 +44,7 @@ public class ${ClassName}Controller extends BaseController<${ClassName}Entity> {
 
     /**
      * 根据实体中的属性值进行查询，查询条件使用等号，分页返回
+     *
      * @param   ${ClassName?uncap_first}    对象实体
      * @param   pageNum   页数
      * @param   pageSize  每页数量
@@ -50,7 +52,7 @@ public class ${ClassName}Controller extends BaseController<${ClassName}Entity> {
      */
     @PostMapping(value = "/find${ClassName}ByCondition/{pageNum}/{pageSize}")
     @ResponseBody
-    public List<${ClassName}Entity> find${ClassName}ByCondition2(${ClassName}Entity ${ClassName?uncap_first},
+    public List<${ClassName}Entity> find${ClassName}ByCondition2(@RequestBody ${ClassName}Entity ${ClassName?uncap_first},
                 @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
         List<${ClassName}Entity> result = ${ClassName?uncap_first}Service.find${ClassName}ByCondition(${ClassName?uncap_first}, pageNum, pageSize);
         if (result == null) {

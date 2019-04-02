@@ -31,6 +31,7 @@ public class ProducerMapperTask extends AbstractTask {
         dataMap.put("MapperPackageName", ConfigUtil.getConfiguration().getPath().getMapper());
         dataMap.put("SqlBuilderPackageName", ConfigUtil.getConfiguration().getPath().getSqlbuilder());
         dataMap.put("BaseEntityPackageName", ConfigUtil.getConfiguration().getEntityPackageName());
+        dataMap.put("EntityPackageName", ConfigUtil.getConfiguration().getPath().getEntity());
         dataMap.put("Author", ConfigUtil.getConfiguration().getAuthor());
         dataMap.put("Date", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         dataMap.put("ClassName", className);

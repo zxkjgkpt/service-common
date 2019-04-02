@@ -13,41 +13,19 @@ public class Main {
         singleInvokerTest();
     }
 
-    public static void many2many() {
-        Invoker invoker = new Many2ManyInvoker.Builder()
-                .setTableName("user")
-                .setClassName("User")
-                .setParentTableName("role")
-                .setParentClassName("Role")
-                .setRelationTableName("user_role")
-                .setForeignKey("userId")
-                .setParentForeignKey("roleId")
-                .build();
-        invoker.execute();
-    }
-
-    public static void one2many() {
-        Invoker invoker = new One2ManyInvoker.Builder()
-                .setTableName("user")
-                .setClassName("User")
-                .setParentTableName("office")
-                .setParentClassName("Office")
-                .setForeignKey("officeId")
-                .build();
-        invoker.execute();
-    }
-
     public static void singleInvokerTest() {
         Invoker invoker = new SingleInvoker.Builder()
                 .setTableName("user")
                 .setClassName("User")
                 .setDescription("用户")
+                .setFirst(true)
                 .build();
         invoker.execute();
     }
 
     public static void producerInvokerTest() {
         Invoker invoker = new ProducerInvoker.Builder()
+                .setTableName("user")
                 .setClassName("User")
                 .setDescription("用户")
                 .setFirst(true)

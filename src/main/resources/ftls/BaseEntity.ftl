@@ -9,11 +9,13 @@ import java.io.Serializable;
  */
 public class BaseEntity implements Serializable {
 
-    private String pageNum;//当前页数
+    private Integer pageNum;//当前页数
 
-    private String pageSize;//每页数量
+    private Integer pageSize;//每页数量
 
-    private String totalCount;//总数
+    private Integer pageCount;//总页数
+
+    private Long total;//总数
 
     private String[] orders;//排序字段
 
@@ -21,28 +23,36 @@ public class BaseEntity implements Serializable {
 
     }
 
-    public String getPageNum() {
+    public Integer getPageNum() {
         return pageNum;
     }
 
-    public void setPageNum(String pageNum) {
+    public void setPageNum(Integer pageNum) {
         this.pageNum = pageNum;
     }
 
-    public String getPageSize() {
+    public Integer getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(String pageSize) {
+    public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
 
-    public String getTotalCount() {
-        return totalCount;
+    public Integer getPageCount() {
+        return pageCount;
     }
 
-    public void setTotalCount(String totalCount) {
-        this.totalCount = totalCount;
+    public void setPageCount(Integer pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public Long getTotal() {
+        return total;
+    }
+
+    public void setTotal(Long total) {
+        this.total = total;
     }
 
     public String[] getOrders() {

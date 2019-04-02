@@ -26,7 +26,7 @@ public class ${ClassName}Entity extends BaseEntity {
     @Id
         </#if>
     @Column(name = "${ColumnInfo.columnName}")
-    private ${ColumnInfo.typeName} ${ColumnInfo.propertyName};
+    private ${ColumnInfo.typeName?cap_first} ${ColumnInfo.propertyName};
 
     </#list>
 
@@ -34,11 +34,11 @@ public class ${ClassName}Entity extends BaseEntity {
     }
 
     <#list ColumnInfoList as ColumnInfo>
-    public ${ColumnInfo.typeName} get${ColumnInfo.propertyName?cap_first}() {
+    public ${ColumnInfo.typeName?cap_first} get${ColumnInfo.propertyName?cap_first}() {
         return ${ColumnInfo.propertyName};
     }
 
-    public void set${ColumnInfo.propertyName?cap_first}(${ColumnInfo.typeName} ${ColumnInfo.propertyName}) {
+    public void set${ColumnInfo.propertyName?cap_first}(${ColumnInfo.typeName?cap_first} ${ColumnInfo.propertyName}) {
         this.${ColumnInfo.propertyName} = ${ColumnInfo.propertyName};
     }
 

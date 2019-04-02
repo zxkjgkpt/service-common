@@ -73,7 +73,7 @@ public interface BaseService<T> {
      * @return  返回null为未查询到结果，返回对象为查询结果，返回多个结果则抛出异常
      */
     @PostMapping(value = "/selectOne")
-    T selectOne(T entity);
+    T selectOne(@RequestBody T entity);
 
     /**
      * 根据主键字段进行查询，方法参数必须包含完整的主键属性，查询条件使用等号
@@ -89,7 +89,7 @@ public interface BaseService<T> {
      * @return  返回查询结果数量
      */
     @PostMapping(value = "/selectCount")
-    int selectCount(T entity);
+    int selectCount(@RequestBody T entity);
 
     /**
      * 根据实体中的属性值进行查询，查询条件使用等号
@@ -97,7 +97,7 @@ public interface BaseService<T> {
      * @return  返回null为未查询到结果，返回对象列表为查询结果
      */
     @PostMapping(value = "/findList")
-    List<T> findList(T entity);
+    List<T> findList(@RequestBody T entity);
 
     /**
      * 根据实体中的属性值进行查询，查询条件使用等号，分页返回
@@ -107,7 +107,7 @@ public interface BaseService<T> {
      * @return  返回null为未查询到结果，返回对象列表为查询结果
      */
     @PostMapping(value = "/findList/{pageNum}/{pageSize}")
-    List<T> findList(T entity, @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize);
+    List<T> findList(@RequestBody T entity, @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize);
 
     /**
      * 查询全部结果

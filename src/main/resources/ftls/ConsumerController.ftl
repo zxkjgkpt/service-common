@@ -1,6 +1,6 @@
 package ${BasePackageName}${ControllerPackageName};
 
-import ${BaseEntityPackageName}${ClassName}Entity;
+import ${BaseEntityPackageName}${EntityPackageName}.${ClassName}Entity;
 import ${BasePackageName}${ServicePackageName}.BaseService;
 import ${BasePackageName}${ServicePackageName}.${ClassName}Service;
 import com.yfny.utilscommon.util.InvokeResult;

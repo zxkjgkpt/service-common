@@ -1,6 +1,6 @@
 package ${BasePackageName}${HystrixPackageName};
 
-import ${BaseEntityPackageName}${ClassName}Entity;
+import ${BaseEntityPackageName}${EntityPackageName}.${ClassName}Entity;
 import ${BasePackageName}${ServicePackageName}.${ClassName}Service;
 import org.springframework.stereotype.Component;
 

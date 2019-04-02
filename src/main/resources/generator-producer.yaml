@@ -9,7 +9,7 @@ entityPackageName: com.yfny.corepojo.entity.demo
 path:
   controller: controller
   service: service
-  entity:
+  entity: entity
   mapper: mapper
   sqlbuilder: sqlbuilder
   hystrix:

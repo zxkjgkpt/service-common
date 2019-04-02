@@ -1,7 +1,8 @@
 package ${BasePackageName}${ServicePackageName};
 
-import ${BaseEntityPackageName}${ClassName}Entity;
+import ${BaseEntityPackageName}${EntityPackageName}.${ClassName}Entity;
 import ${BasePackageName}${MapperPackageName}.${ClassName}Mapper;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ public class ${ClassName}ServiceImpl extends BaseServiceImpl<${ClassName}Entity>
 
     /**
      * 根据实体中的属性值进行查询，查询条件使用等号
+     *
      * @param   ${ClassName?uncap_first}    对象实体
      * @return  返回对象列表为查询结果
      */
@@ -36,14 +38,24 @@ public class ${ClassName}ServiceImpl extends BaseServiceImpl<${ClassName}Entity>
 
     /**
      * 根据实体中的属性值进行查询，查询条件使用等号，分页返回
+     *
      * @param   ${ClassName?uncap_first}    对象实体
      * @param   pageNum   页数
      * @param   pageSize  每页数量
      * @return  对象列表
      */
     public List<${ClassName}Entity> find${ClassName}ByCondition(${ClassName}Entity ${ClassName?uncap_first}, int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
-        return ${ClassName?uncap_first}Mapper.find${ClassName}ByCondition(${ClassName?uncap_first});
+        Page<${ClassName}Entity> resultPage = PageHelper.startPage(pageNum, pageSize);
+        List<${ClassName}Entity> resultList = ${ClassName?uncap_first}Mapper.find${ClassName}ByCondition(${ClassName?uncap_first});
+        if (resultList != null) {
+            for (${ClassName}Entity result : resultList) {
+                result.setPageNum(resultPage.getPageNum());
+                result.setPageSize(resultPage.getPageSize());
+                result.setPageCount(resultPage.getPages());
+                result.setTotal(resultPage.getTotal());
+            }
+        }
+        return resultList;
     }
 
 }

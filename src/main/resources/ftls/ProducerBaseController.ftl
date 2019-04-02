@@ -1,5 +1,6 @@
 package ${BasePackageName}${ControllerPackageName};
 
+import ${BaseEntityPackageName}base.BaseEntity;
 import ${BasePackageName}${ServicePackageName}.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,7 @@ import java.util.List;
  * Author ${Author}
  * Date  ${Date}
  */
-public abstract class BaseController<T> {
+public abstract class BaseController<T extends BaseEntity> {
 
     @Autowired
     private BaseServiceImpl<T> baseService;
@@ -23,6 +24,7 @@ public abstract class BaseController<T> {
 
     /**
      * 保存一个实体，null的属性也会保存，不会使用数据库默认值
+     *
      * @param   entity  对象实体
      * @return  返回0为失败，返回1为成功
      */
@@ -34,6 +36,7 @@ public abstract class BaseController<T> {
 
     /**
      * 保存一个实体，null的属性不会保存，会使用数据库默认值
+     *
      * @param   entity  对象实体
      * @return  返回0为失败，返回1为成功
      */
@@ -45,6 +48,7 @@ public abstract class BaseController<T> {
 
     /**
      * 根据主键更新实体全部字段，null值会被更新
+     *
      * @param   entity  对象实体
      * @return  返回0为失败，返回1为成功
      */
@@ -56,6 +60,7 @@ public abstract class BaseController<T> {
 
     /**
      * 根据主键更新属性不为null的值
+     *
      * @param   entity  对象实体
      * @return  返回0为失败，返回1为成功
      */
@@ -67,6 +72,7 @@ public abstract class BaseController<T> {
 
     /**
      * 根据实体属性作为条件进行删除，查询条件使用等号
+     *
      * @param   entity  对象实体
      * @return  返回0为失败，返回1为成功
      */
@@ -78,6 +84,7 @@ public abstract class BaseController<T> {
 
     /**
      * 根据主键字段进行删除，方法参数必须包含完整的主键属性
+     *
      * @param   key  主键
      * @return  返回0为失败，返回1为成功
      */
@@ -89,6 +96,7 @@ public abstract class BaseController<T> {
 
     /**
      * 根据主键字段进行删除，方法参数必须包含完整的主键属性
+     *
      * @param   key  主键
      * @return  返回false为不存在，返回true为存在
      */
@@ -100,18 +108,20 @@ public abstract class BaseController<T> {
 
     /**
      * 根据实体中的属性进行查询，只能有一个返回值，有多个结果是抛出异常，查询条件使用等号
+     *
      * @param   entity  对象实体
      * @return  返回null为未查询到结果，返回对象为查询结果，返回多个结果则抛出异常
      */
     @PostMapping(value = "/selectOne")
     @ResponseBody
-    public T selectOne(T entity) throws Exception {
+    public T selectOne(@RequestBody T entity) throws Exception {
         T result = getBaseService().selectOne(entity);
         return result;
     }
 
     /**
      * 根据主键字段进行查询，方法参数必须包含完整的主键属性，查询条件使用等号
+     *
      * @param   key  主键
      * @return  返回null为未查询到结果，返回对象为查询结果
      */
@@ -124,23 +134,25 @@ public abstract class BaseController<T> {
 
     /**
      * 根据实体中的属性查询总数，查询条件使用等号
+     *
      * @param   entity  对象实体
      * @return  返回查询结果数量
      */
     @PostMapping(value = "/selectCount")
     @ResponseBody
-    public int selectCount(T entity) throws Exception {
+    public int selectCount(@RequestBody T entity) throws Exception {
         return getBaseService().selectCount(entity);
     }
 
     /**
      * 根据实体中的属性值进行查询，查询条件使用等号
+     *
      * @param   entity  对象实体
      * @return  返回null为未查询到结果，返回对象列表为查询结果
      */
     @PostMapping(value = "/findList")
     @ResponseBody
-    public List<T> findList1(T entity) throws Exception {
+    public List<T> findList1(@RequestBody T entity) throws Exception {
         List<T> result = getBaseService().findList(entity);
         if (result == null) {
             result = new ArrayList<>();
@@ -150,6 +162,7 @@ public abstract class BaseController<T> {
 
     /**
      * 根据实体中的属性值进行查询，查询条件使用等号，分页返回
+     *
      * @param   entity    对象实体
      * @param   pageNum   页数
      * @param   pageSize  每页数量
@@ -157,7 +170,7 @@ public abstract class BaseController<T> {
      */
     @PostMapping(value = "/findList/{pageNum}/{pageSize}")
     @ResponseBody
-    public List<T> findList2(T entity, @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
+    public List<T> findList2(@RequestBody T entity, @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
         List<T> result = getBaseService().findList(entity, pageNum, pageSize);
         if (result == null) {
             result = new ArrayList<>();
@@ -167,6 +180,7 @@ public abstract class BaseController<T> {
 
     /**
      * 查询全部结果
+     *
      * @return  返回对象列表为查询结果
      */
     @GetMapping(value = "/findAllList")
@@ -181,6 +195,7 @@ public abstract class BaseController<T> {
 
     /**
      * 查询全部结果分页返回
+     *
      * @param   pageNum   页数
      * @param   pageSize  每页数量
      * @return  返回对象列表为查询结果

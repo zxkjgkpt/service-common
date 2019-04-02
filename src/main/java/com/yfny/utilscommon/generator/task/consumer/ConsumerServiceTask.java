@@ -30,6 +30,7 @@ public class ConsumerServiceTask extends AbstractTask {
         dataMap.put("BasePackageName", ConfigUtil.getConfiguration().getPackageName());
         dataMap.put("ServicePackageName", ConfigUtil.getConfiguration().getPath().getService());
         dataMap.put("BaseEntityPackageName", ConfigUtil.getConfiguration().getEntityPackageName());
+        dataMap.put("EntityPackageName", ConfigUtil.getConfiguration().getPath().getEntity());
         dataMap.put("HystricPackageName", ConfigUtil.getConfiguration().getPath().getHystrix());
         dataMap.put("Author", ConfigUtil.getConfiguration().getAuthor());
         dataMap.put("Date", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));

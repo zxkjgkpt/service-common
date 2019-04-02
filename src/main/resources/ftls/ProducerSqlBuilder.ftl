@@ -1,6 +1,6 @@
 package ${BasePackageName}${SqlBuilderPackageName};
 
-import ${BaseEntityPackageName}${ClassName}Entity;
+import ${BaseEntityPackageName}${EntityPackageName}.${ClassName}Entity;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
 
@@ -13,6 +13,7 @@ public class ${ClassName}SqlBuilder {
 
     /**
      * 根据实体中的属性值进行查询，查询条件使用等号
+     *
      * @param   ${ClassName?uncap_first}    对象实体
      * @return  Sql语句
      */
