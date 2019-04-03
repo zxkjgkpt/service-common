@@ -16,12 +16,21 @@ import java.util.List;
 public interface ${ClassName}Mapper extends BaseMapper<${ClassName}Entity> {
 
     /**
-     * 根据实体中的属性值进行查询，查询条件使用等号
+     * 根据实体中的属性值进行查询，查询条件使用LIKE，并列查询取交集
      *
      * @param   ${ClassName?uncap_first}    对象实体
      * @return  返回对象列表为查询结果
      */
-    @SelectProvider(type = ${ClassName}SqlBuilder.class, method = "buildFind${ClassName}ByCondition")
-    List<${ClassName}Entity> find${ClassName}ByCondition(@Param("${ClassName?uncap_first}") ${ClassName}Entity ${ClassName?uncap_first});
+    @SelectProvider(type = ${ClassName}SqlBuilder.class, method = "buildFind${ClassName}ByAndCondition")
+    List<${ClassName}Entity> find${ClassName}ByAndCondition(@Param("${ClassName?uncap_first}") ${ClassName}Entity ${ClassName?uncap_first});
+
+    /**
+     * 根据实体中的属性值进行查询，查询条件使用LIKE，亦或查询取并集
+     *
+     * @param   ${ClassName?uncap_first}    对象实体
+     * @return  返回对象列表为查询结果
+     */
+    @SelectProvider(type = ${ClassName}SqlBuilder.class, method = "buildFind${ClassName}ByORCondition")
+    List<${ClassName}Entity> find${ClassName}ByORCondition(@Param("${ClassName?uncap_first}") ${ClassName}Entity ${ClassName?uncap_first});
 
 }

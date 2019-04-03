@@ -27,15 +27,15 @@ public class ${ClassName}Controller extends BaseController<${ClassName}Entity> {
     }
 
     /**
-     * 根据实体中的属性值进行查询，查询条件使用等号
+     * 根据实体中的属性值进行查询，查询条件使用LIKE，并列查询取交集
      *
      * @param   ${ClassName?uncap_first}    对象实体
      * @return  返回对象列表为查询结果
      */
-    @PostMapping(value = "/find${ClassName}ByCondition")
+    @PostMapping(value = "/find${ClassName}ByAndCondition")
     @ResponseBody
-    public List<${ClassName}Entity> find${ClassName}ByCondition1(@RequestBody ${ClassName}Entity ${ClassName?uncap_first}) throws Exception {
-        List<${ClassName}Entity> result = ${ClassName?uncap_first}Service.find${ClassName}ByCondition(${ClassName?uncap_first});
+    public List<${ClassName}Entity> find${ClassName}ByAndCondition1(@RequestBody ${ClassName}Entity ${ClassName?uncap_first}) throws Exception {
+        List<${ClassName}Entity> result = ${ClassName?uncap_first}Service.find${ClassName}ByAndCondition(${ClassName?uncap_first});
         if (result == null) {
             result = new ArrayList<>();
         }
@@ -43,18 +43,53 @@ public class ${ClassName}Controller extends BaseController<${ClassName}Entity> {
     }
 
     /**
-     * 根据实体中的属性值进行查询，查询条件使用等号，分页返回
+     * 根据实体中的属性值进行查询，查询条件使用LIKE，并列查询取交集，分页返回
      *
      * @param   ${ClassName?uncap_first}    对象实体
      * @param   pageNum   页数
      * @param   pageSize  每页数量
      * @return  返回对象列表为查询结果
      */
-    @PostMapping(value = "/find${ClassName}ByCondition/{pageNum}/{pageSize}")
+    @PostMapping(value = "/find${ClassName}ByAndCondition/{pageNum}/{pageSize}")
     @ResponseBody
-    public List<${ClassName}Entity> find${ClassName}ByCondition2(@RequestBody ${ClassName}Entity ${ClassName?uncap_first},
+    public List<${ClassName}Entity> find${ClassName}ByAndCondition2(@RequestBody ${ClassName}Entity ${ClassName?uncap_first},
                 @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
-        List<${ClassName}Entity> result = ${ClassName?uncap_first}Service.find${ClassName}ByCondition(${ClassName?uncap_first}, pageNum, pageSize);
+        List<${ClassName}Entity> result = ${ClassName?uncap_first}Service.find${ClassName}ByAndCondition(${ClassName?uncap_first}, pageNum, pageSize);
+        if (result == null) {
+            result = new ArrayList<>();
+        }
+        return result;
+    }
+
+    /**
+     * 根据实体中的属性值进行查询，查询条件使用LIKE，亦或查询取并集
+     *
+     * @param   ${ClassName?uncap_first}    对象实体
+     * @return  返回对象列表为查询结果
+     */
+    @PostMapping(value = "/find${ClassName}ByORCondition")
+    @ResponseBody
+    public List<${ClassName}Entity> find${ClassName}ByORCondition1(@RequestBody ${ClassName}Entity ${ClassName?uncap_first}) throws Exception {
+        List<${ClassName}Entity> result = ${ClassName?uncap_first}Service.find${ClassName}ByORCondition(${ClassName?uncap_first});
+        if (result == null) {
+            result = new ArrayList<>();
+        }
+        return result;
+    }
+
+    /**
+     * 根据实体中的属性值进行查询，查询条件使用LIKE，亦或查询取并集，分页返回
+     *
+     * @param   ${ClassName?uncap_first}    对象实体
+     * @param   pageNum   页数
+     * @param   pageSize  每页数量
+     * @return  返回对象列表为查询结果
+     */
+    @PostMapping(value = "/find${ClassName}ByORCondition/{pageNum}/{pageSize}")
+    @ResponseBody
+    public List<${ClassName}Entity> find${ClassName}ByORCondition2(@RequestBody ${ClassName}Entity ${ClassName?uncap_first},
+                @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
+        List<${ClassName}Entity> result = ${ClassName?uncap_first}Service.find${ClassName}ByORCondition(${ClassName?uncap_first}, pageNum, pageSize);
         if (result == null) {
             result = new ArrayList<>();
         }
