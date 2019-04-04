@@ -13,7 +13,7 @@ import java.sql.SQLException;
  **/
 public class ConsumerInvoker extends AbstractInvoker {
 
-    protected boolean isFirst = true;
+    protected boolean isFirst = false;
 
     protected String applicationName;
 

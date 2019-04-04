@@ -22,7 +22,7 @@ import java.util.Map;
 public class ProducerSqlBuilderTask extends AbstractTask {
 
     public ProducerSqlBuilderTask(String className, String tableName, String description, List<ColumnInfo> tableInfos) {
-        super(className, tableName, description, null, null, null, tableInfos);
+        super(className, tableName, description, tableInfos);
     }
 
     @Override

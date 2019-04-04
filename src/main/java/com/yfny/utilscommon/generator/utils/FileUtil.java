@@ -41,7 +41,7 @@ public class FileUtil {
     }
 
 
-    public static void addToMapper(int type, Object data, String filePath) throws IOException, TemplateException {
+    public static void addToJava(int type, Object data, String filePath) throws IOException, TemplateException {
         Template tpl = getTemplate(type); // 获取模板文件
         File file = new File(filePath);
         // 填充数据
@@ -191,6 +191,8 @@ public class FileUtil {
                 return FreemarketConfigUtils.getInstance().getTemplate("ConsumerController.ftl");
             case FreemarketConfigUtils.TYPE_EXCEPTION_HANDLER:
                 return FreemarketConfigUtils.getInstance().getTemplate("ExceptionHandler.ftl");
+            case FreemarketConfigUtils.TYPE_ADD_ENTITY:
+                return FreemarketConfigUtils.getInstance().getTemplate("EntityAdd.ftl");
             case FreemarketConfigUtils.TYPE_API_BASE_TEST:
                 return FreemarketConfigUtils.getInstance().getTemplate("APIBaseTest.ftl");
             case FreemarketConfigUtils.TYPE_API_UNIT_TEST:

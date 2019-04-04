@@ -43,6 +43,15 @@ public class Main {
         invoker.execute();
     }
 
+    public void relationInvoker() {
+        Invoker invoker = new RelationInvoker.Builder()
+                .setClassName("User")
+                .setForeignKey("userId")
+                .setRelationClass("Car", RelationInvoker.Builder.ONE_TO_MANY)
+                .build();
+        invoker.execute();
+    }
+
     public static void apiTestInvokerTest() {
         Invoker invoker = new TestInvoker.Builder()
                 .build();

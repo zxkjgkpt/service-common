@@ -2,7 +2,10 @@ package com.yfny.utilscommon.generator.task;
 
 import com.yfny.utilscommon.generator.entity.ColumnInfo;
 import com.yfny.utilscommon.generator.task.base.AbstractTask;
-import com.yfny.utilscommon.generator.utils.*;
+import com.yfny.utilscommon.generator.utils.ConfigUtil;
+import com.yfny.utilscommon.generator.utils.FileUtil;
+import com.yfny.utilscommon.generator.utils.FreemarketConfigUtils;
+import com.yfny.utilscommon.generator.utils.StringUtil;
 import freemarker.template.TemplateException;
 
 import java.io.IOException;
@@ -18,25 +21,8 @@ import java.util.Map;
  **/
 public class EntityTask extends AbstractTask {
 
-    /**
-     * 1.单表生成  2.多表时生成子表实体
-     */
-    public EntityTask(String className, String tableName, String description, List<ColumnInfo> infos) {
-        this(className, tableName, description, null, null, infos);
-    }
-
-    /**
-     * 一对多关系生成主表实体
-     */
-    public EntityTask(String className, String tableName, String description, String parentClassName, String foreignKey, List<ColumnInfo> tableInfos) {
-        this(className, tableName, description, parentClassName, foreignKey, null, tableInfos);
-    }
-
-    /**
-     * 多对多关系生成主表实体
-     */
-    public EntityTask(String className, String tableName, String description, String parentClassName, String foreignKey, String parentForeignKey, List<ColumnInfo> tableInfos) {
-        super(className, tableName, description, parentClassName, foreignKey, parentForeignKey, tableInfos);
+    public EntityTask(String className, String tableName, String description, List<ColumnInfo> tableInfos) {
+        super(className, tableName, description, tableInfos);
     }
 
     @Override

@@ -11,6 +11,7 @@ import freemarker.template.TemplateException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -22,13 +23,9 @@ public abstract class AbstractInvoker implements Invoker {
     protected String tableName;
     protected String className;
     protected String description;//新增属性--描述
-    protected String parentTableName;
-    protected String parentClassName;
     protected String foreignKey;
-    protected String relationalTableName;
-    protected String parentForeignKey;
+    protected Map<String, String> relationClassNameMap;
     protected List<ColumnInfo> tableInfos;
-    protected List<ColumnInfo> parentTableInfos;
     protected ConnectionUtil connectionUtil = new ConnectionUtil();
     protected TaskQueue taskQueue = new TaskQueue();
     private ExecutorService executorPool = Executors.newFixedThreadPool(8);
@@ -82,24 +79,12 @@ public abstract class AbstractInvoker implements Invoker {
         this.description = description;
     }
 
-    public void setParentTableName(String parentTableName) {
-        this.parentTableName = parentTableName;
-    }
-
-    public void setParentClassName(String parentClassName) {
-        this.parentClassName = parentClassName;
-    }
-
     public void setForeignKey(String foreignKey) {
         this.foreignKey = foreignKey;
     }
 
-    public void setRelationalTableName(String relationalTableName) {
-        this.relationalTableName = relationalTableName;
-    }
-
-    public void setParentForeignKey(String parentForeignKey) {
-        this.parentForeignKey = parentForeignKey;
+    public void setRelationClassNameMap(Map<String, String> relationClassNameMap) {
+        this.relationClassNameMap = relationClassNameMap;
     }
 
     public String getTableName() {
@@ -114,23 +99,11 @@ public abstract class AbstractInvoker implements Invoker {
         return description;
     }
 
-    public String getParentTableName() {
-        return parentTableName;
-    }
-
-    public String getParentClassName() {
-        return parentClassName;
-    }
-
     public String getForeignKey() {
         return foreignKey;
     }
 
-    public String getRelationalTableName() {
-        return relationalTableName;
-    }
-
-    public String getParentForeignKey() {
-        return parentForeignKey;
+    public Map<String, String> getRelationClassNameMap() {
+        return relationClassNameMap;
     }
 }

@@ -49,7 +49,10 @@ public class APIUnitTest extends APIBaseTest {
         ${requestParam.parameter.type.name} ${requestParam.parameter.name} = new ${requestParam.parameter.type.name}();
                     <#assign param = "content"/>
                     <#list requestParam.parameter.type.declaredFields as field>
-                        <#if field.name != "serialVersionUID">
+                        <#if field.name != "serialVersionUID" && field.name != "pageNum"
+                        && field.name != "pageSize" && field.name != "pageCount"
+                        && field.name != "total" && field.name != "orders"
+                        && field.name != "ASC" && field.name != "DESC">
         ${requestParam.parameter.name}.set${field.name?cap_first}(null);
                         </#if>
                     </#list>

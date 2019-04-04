@@ -5,6 +5,7 @@ import ${BasePackageName}base.BaseEntity;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.List;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -43,4 +44,5 @@ public class ${ClassName}Entity extends BaseEntity {
     }
 
     </#list>
+    /**************************************此下为非数据库字段属性**************************************/
 }

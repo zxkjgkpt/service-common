@@ -9,23 +9,20 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 代码生成器抽象任务
  * Created by jisongZhou on 2019/3/5.
  **/
 public abstract class AbstractTask implements Serializable {
-    protected String tableName;
-    protected String className;
+    protected String tableName;//数据库表名称
+    protected String className;//Java对象类名称
     protected String description;//新增属性--描述
     protected String applicationName;//新增属性--微服务名称
-    protected String parentTableName;
-    protected String parentClassName;
-    protected String foreignKey;
-    protected String relationalTableName;
-    protected String parentForeignKey;
-    protected List<ColumnInfo> tableInfos;
-    protected List<ColumnInfo> parentTableInfos;
+    protected String foreignKey;//外键
+    protected Map<String, String> relationClassNameMap;//相关对象类集合
+    protected List<ColumnInfo> tableInfos;//数据库表字段属性
 
     /**
      * Controller、Service、Dao
@@ -37,7 +34,6 @@ public abstract class AbstractTask implements Serializable {
     }
 
     /**
-     *
      * Controller、Service、Dao
      *
      * @param className
@@ -49,7 +45,6 @@ public abstract class AbstractTask implements Serializable {
     }
 
     /**
-     *
      * Controller、Service、Dao
      *
      * @param className
@@ -66,43 +61,28 @@ public abstract class AbstractTask implements Serializable {
      * Entity
      *
      * @param className
-     * @param parentClassName
-     * @param foreignKey
+     * @param tableName
+     * @param description
      * @param tableInfos
      */
-    public AbstractTask(String className, String tableName, String description, String parentClassName, String foreignKey, String parentForeignKey, List<ColumnInfo> tableInfos) {
+    public AbstractTask(String className, String tableName, String description, List<ColumnInfo> tableInfos) {
         this.className = className;
         this.tableName = tableName;
         this.description = description;
-        this.parentClassName = parentClassName;
-        this.foreignKey = foreignKey;
-        this.parentForeignKey = parentForeignKey;
         this.tableInfos = tableInfos;
     }
 
-
     /**
-     * Mapper
+     * Add
      *
-     * @param tableName
      * @param className
-     * @param parentTableName
-     * @param parentClassName
      * @param foreignKey
-     * @param parentForeignKey
-     * @param tableInfos
-     * @param parentTableInfos
+     * @param relationClassNameMap
      */
-    public AbstractTask(String tableName, String className, String parentTableName, String parentClassName, String foreignKey, String parentForeignKey, String relationalTableName, List<ColumnInfo> tableInfos, List<ColumnInfo> parentTableInfos) {
-        this.tableName = tableName;
+    public AbstractTask(String className, String foreignKey, Map<String, String> relationClassNameMap) {
         this.className = className;
-        this.parentTableName = parentTableName;
-        this.parentClassName = parentClassName;
         this.foreignKey = foreignKey;
-        this.parentForeignKey = parentForeignKey;
-        this.relationalTableName = relationalTableName;
-        this.tableInfos = tableInfos;
-        this.parentTableInfos = parentTableInfos;
+        this.relationClassNameMap = relationClassNameMap;
     }
 
     public abstract void run() throws IOException, TemplateException;

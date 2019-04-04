@@ -8,6 +8,7 @@ import com.yfny.utilscommon.generator.task.producer.*;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 代码生成器任务执行
@@ -81,6 +82,12 @@ public class TaskQueue {
         }
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getController())) {
             taskQueue.add(new ConsumerControllerTask(className, description));
+        }
+    }
+
+    public void initRelationTasks(String className, String foreignKey, Map<String, String> relationClassNameMap) {
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getEntity())) {
+            taskQueue.add(new EntityAddTask(className, foreignKey, relationClassNameMap));
         }
     }
 

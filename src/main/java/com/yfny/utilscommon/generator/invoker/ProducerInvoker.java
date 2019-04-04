@@ -13,7 +13,7 @@ import java.sql.SQLException;
  **/
 public class ProducerInvoker extends AbstractInvoker {
 
-    protected boolean isFirst = true;
+    protected boolean isFirst = false;
 
     @Override
     protected void getTableInfos() throws SQLException {

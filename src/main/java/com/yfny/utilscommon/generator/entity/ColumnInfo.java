@@ -10,6 +10,7 @@ import java.io.Serializable;
  * Created by jisongZhou on 2019/3/5.
  **/
 public class ColumnInfo implements Serializable {
+
     private String columnName; // 列名
     private int type; // 类型代码
     private String typeName; //新增属性--类型名称
@@ -67,4 +68,5 @@ public class ColumnInfo implements Serializable {
     public void setPrimaryKey(boolean primaryKey) {
         isPrimaryKey = primaryKey;
     }
+
 }
