@@ -20,7 +20,7 @@ public abstract class AbstractTask implements Serializable {
     protected String className;//Java对象类名称
     protected String description;//新增属性--描述
     protected String applicationName;//新增属性--微服务名称
-    protected String foreignKey;//外键
+    protected String foreignKey;//外键字段名
     protected Map<String, String> relationClassNameMap;//相关对象类集合
     protected List<ColumnInfo> tableInfos;//数据库表字段属性
 

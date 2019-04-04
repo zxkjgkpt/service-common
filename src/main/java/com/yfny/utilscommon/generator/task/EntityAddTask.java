@@ -17,8 +17,8 @@ import java.util.Map;
  **/
 public class EntityAddTask extends AbstractTask {
 
-    public EntityAddTask(String className, String foreignKey, Map<String, String> relationClassNameMap) {
-        super(className, foreignKey, relationClassNameMap);
+    public EntityAddTask(String className, Map<String, String> relationClassNameMap) {
+        super(className, null, relationClassNameMap);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class EntityAddTask extends AbstractTask {
         String filePath = FileUtil.getSourcePath() + StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) + StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getEntity());
         String fileName = className + "Entity.java";
         // 填充Entity文件
-        System.out.println("Generating Add" + fileName);
+        System.out.println("Generating Add " + fileName);
         FileUtil.addToJava(FreemarketConfigUtils.TYPE_ADD_ENTITY, dataMap, filePath + fileName);
     }
 }

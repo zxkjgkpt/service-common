@@ -14,6 +14,8 @@ import java.util.Map;
  **/
 public class RelationInvoker extends AbstractInvoker {
 
+    private String writeType;
+
     @Override
     protected void getTableInfos() throws SQLException {
 
@@ -21,10 +23,17 @@ public class RelationInvoker extends AbstractInvoker {
 
     @Override
     protected void initTasks() {
-        taskQueue.initRelationTasks(className, foreignKey, relationClassNameMap);
+        taskQueue.initRelationTasks(className, foreignKey, relationClassNameMap, writeType);
     }
 
     public static class Builder extends AbstractBuilder {
+
+        public final static String ENTITY_FILE = "ENTITY";
+        public final static String CONSUMER_FILE = "CONSUMER";
+        public final static String PRODUCER_FILE = "PRODUCER";
+
+        public final static String MAIN_CLASS = "MAIN";
+        public final static String VICE_CLASS = "VICE";
 
         public final static String ONE_TO_ONE = "ONE2ONE";
         public final static String ONE_TO_MANY = "ONE2MANY";
@@ -49,6 +58,11 @@ public class RelationInvoker extends AbstractInvoker {
             return this;
         }
 
+        public Builder setWriteType(String writeType) {
+            invoker.setWriteType(writeType);
+            return this;
+        }
+
         @Override
         public Invoker build() {
             if (!isParamtersValid()) {
@@ -61,6 +75,14 @@ public class RelationInvoker extends AbstractInvoker {
         public void checkBeforeBuild() throws Exception {
 
         }
+    }
+
+    public String getWriteType() {
+        return writeType;
+    }
+
+    public void setWriteType(String writeType) {
+        this.writeType = writeType;
     }
 
 }

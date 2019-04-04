@@ -23,7 +23,7 @@ public abstract class AbstractInvoker implements Invoker {
     protected String tableName;
     protected String className;
     protected String description;//新增属性--描述
-    protected String foreignKey;
+    protected String foreignKey;//外键
     protected Map<String, String> relationClassNameMap;
     protected List<ColumnInfo> tableInfos;
     protected ConnectionUtil connectionUtil = new ConnectionUtil();

@@ -48,6 +48,7 @@ public class Main {
                 .setClassName("User")
                 .setForeignKey("userId")
                 .setRelationClass("Car", RelationInvoker.Builder.ONE_TO_MANY)
+                .setWriteType(RelationInvoker.Builder.ENTITY_FILE)
                 .build();
         invoker.execute();
     }

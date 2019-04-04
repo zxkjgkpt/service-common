@@ -68,7 +68,7 @@ public class FileUtil {
     public static void addContainsToFile(String filePath, long position, String contents) throws IOException {
         //1、参数校验
         File file = new File(filePath);
-        System.out.println(file);
+        //System.out.println(file);
         //判断文件是否存在
         if (!(file.exists() && file.isFile())) {
             System.out.println("文件不存在  ~ ");
@@ -135,7 +135,7 @@ public class FileUtil {
              * **/
             RandomAccessFile raf = new RandomAccessFile(filePath, "r");
             //获取RandomAccessFile对象文件指针的位置，初始位置是0
-            System.out.println("RandomAccessFile文件指针的初始位置:" + raf.getFilePointer());
+            //System.out.println("RandomAccessFile文件指针的初始位置:" + raf.getFilePointer());
             raf.seek(position);//移动文件指针位置
             byte[] buff = new byte[1024];
             //用于保存实际读取的字节数
@@ -148,7 +148,7 @@ public class FileUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(content);
+        //System.out.println(content);
         return content;
     }
 
@@ -193,6 +193,8 @@ public class FileUtil {
                 return FreemarketConfigUtils.getInstance().getTemplate("ExceptionHandler.ftl");
             case FreemarketConfigUtils.TYPE_ADD_ENTITY:
                 return FreemarketConfigUtils.getInstance().getTemplate("EntityAdd.ftl");
+            case FreemarketConfigUtils.TYPE_ADD_PRODUCER_MAPPER:
+                return FreemarketConfigUtils.getInstance().getTemplate("ProducerMapperAdd.ftl");
             case FreemarketConfigUtils.TYPE_API_BASE_TEST:
                 return FreemarketConfigUtils.getInstance().getTemplate("APIBaseTest.ftl");
             case FreemarketConfigUtils.TYPE_API_UNIT_TEST:

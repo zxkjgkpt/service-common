@@ -1,6 +1,7 @@
 package com.yfny.utilscommon.generator.utils;
 
 import com.yfny.utilscommon.generator.entity.ColumnInfo;
+import com.yfny.utilscommon.generator.invoker.RelationInvoker;
 import com.yfny.utilscommon.generator.task.*;
 import com.yfny.utilscommon.generator.task.base.AbstractTask;
 import com.yfny.utilscommon.generator.task.consumer.*;
@@ -85,9 +86,17 @@ public class TaskQueue {
         }
     }
 
-    public void initRelationTasks(String className, String foreignKey, Map<String, String> relationClassNameMap) {
-        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getEntity())) {
-            taskQueue.add(new EntityAddTask(className, foreignKey, relationClassNameMap));
+    public void initRelationTasks(String className, String foreignKey, Map<String, String> relationClassNameMap, String writeType) {
+        if (RelationInvoker.Builder.ENTITY_FILE.equals(writeType)) {
+            if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getEntity())) {
+                taskQueue.add(new EntityAddTask(className, relationClassNameMap));
+            }
+        } else if (RelationInvoker.Builder.PRODUCER_FILE.equals(writeType)) {
+            if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getMapper())) {
+                taskQueue.add(new ProducerMapperAddTask(className, foreignKey, relationClassNameMap));
+            }
+        } else if (RelationInvoker.Builder.CONSUMER_FILE.equals(writeType)) {
+
         }
     }
 

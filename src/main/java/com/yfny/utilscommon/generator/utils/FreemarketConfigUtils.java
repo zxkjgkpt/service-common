@@ -28,8 +28,9 @@ public class FreemarketConfigUtils {
     public final static int TYPE_CONSUMER_CONTROLLER = 13;
     public final static int TYPE_EXCEPTION_HANDLER = 14;
     public final static int TYPE_ADD_ENTITY = 15;
-    public final static int TYPE_API_BASE_TEST = 16;
-    public final static int TYPE_API_UNIT_TEST = 17;
+    public final static int TYPE_ADD_PRODUCER_MAPPER = 16;
+    public final static int TYPE_API_BASE_TEST = 17;
+    public final static int TYPE_API_UNIT_TEST = 18;
 
     private static Configuration configuration;
 
