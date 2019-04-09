@@ -10,6 +10,7 @@ import tk.mybatis.mapper.common.MySqlMapper;
  * Author ${Author}
  * Date  ${Date}
  */
+@tk.mybatis.mapper.annotation.RegisterMapper
 public interface BaseMapper<T> extends tk.mybatis.mapper.common.BaseMapper<T>, MySqlMapper<T>, IdsMapper<T>, ConditionMapper<T>, ExampleMapper<T> {
 
 }
