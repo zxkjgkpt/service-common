@@ -4,7 +4,7 @@ import com.codingapi.txlcn.tc.annotation.LcnTransaction;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import ${BaseEntityPackageName}base.BaseEntity;
-import tk.mybatis.mapper.common.BaseMapper;
+import ${BasePackageName}${MapperPackageName}.BaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 

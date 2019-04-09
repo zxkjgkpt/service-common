@@ -14,29 +14,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 代码生成器生产者（微服务）服务层基类任务
- * Created by jisongZhou on 2019/3/26.
+ * 代码生成器生产者（微服务）数据交互层基类任务
+ * Created by jisongZhou on 2019/4/9.
  **/
-public class ProducerBaseServiceImplTask extends AbstractTask {
+public class ProducerBaseMapperTask extends AbstractTask {
 
-    public ProducerBaseServiceImplTask(String className) {
+    public ProducerBaseMapperTask(String className) {
         super(className);
     }
 
     @Override
     public void run() throws IOException, TemplateException {
-        // 生成BaseServiceImpl填充数据
+        // 生成BaseMapper填充数据
         Map<String, String> dataMap = new HashMap<>();
         dataMap.put("BasePackageName", ConfigUtil.getConfiguration().getPackageName());
-        dataMap.put("ServicePackageName", ConfigUtil.getConfiguration().getPath().getService());
         dataMap.put("MapperPackageName", ConfigUtil.getConfiguration().getPath().getMapper());
-        dataMap.put("BaseEntityPackageName", ConfigUtil.getConfiguration().getEntityPackageName());
         dataMap.put("Author", ConfigUtil.getConfiguration().getAuthor());
         dataMap.put("Date", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-        String filePath = FileUtil.getSourcePath() + StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) + StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getService());
-        String fileName = "BaseServiceImpl.java";
-        // 生成BaseServiceImpl文件
+        String filePath = FileUtil.getSourcePath() + StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) + StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getMapper());
+        String fileName = "BaseMapper.java";
+        // 生成BaseMapper文件
         System.out.println("Generating " + fileName);
-        FileUtil.generateToJava(FreemarketConfigUtils.TYPE_PRODUCER_BASE_SERVICE, dataMap, filePath + fileName);
+        FileUtil.generateToJava(FreemarketConfigUtils.TYPE_PRODUCER_BASE_MAPPER, dataMap, filePath + fileName);
     }
 }

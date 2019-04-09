@@ -31,6 +31,9 @@ public class TaskQueue {
     }
 
     private void initProducerBaseTasks(String className) {
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getMapper())) {
+            taskQueue.add(new ProducerBaseMapperTask(className));
+        }
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getService())) {
             taskQueue.add(new ProducerBaseServiceImplTask(className));
         }

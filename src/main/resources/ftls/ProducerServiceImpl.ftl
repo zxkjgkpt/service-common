@@ -1,12 +1,12 @@
 package ${BasePackageName}${ServicePackageName};
 
 import ${BaseEntityPackageName}${EntityPackageName}.${ClassName}Entity;
+import ${BasePackageName}${MapperPackageName}.BaseMapper;
 import ${BasePackageName}${MapperPackageName}.${ClassName}Mapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.common.BaseMapper;
 
 import java.util.List;
 

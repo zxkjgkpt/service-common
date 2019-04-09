@@ -183,6 +183,8 @@ public class FileUtil {
                 return FreemarketConfigUtils.getInstance().getTemplate("Entity.ftl");
             case FreemarketConfigUtils.TYPE_PRODUCER_SQL_BUILDER:
                 return FreemarketConfigUtils.getInstance().getTemplate("ProducerSqlBuilder.ftl");
+            case FreemarketConfigUtils.TYPE_PRODUCER_BASE_MAPPER:
+                return FreemarketConfigUtils.getInstance().getTemplate("ProducerBaseMapper.ftl");
             case FreemarketConfigUtils.TYPE_PRODUCER_MAPPER:
                 return FreemarketConfigUtils.getInstance().getTemplate("ProducerMapper.ftl");
             case FreemarketConfigUtils.TYPE_PRODUCER_BASE_SERVICE:

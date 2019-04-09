@@ -4,7 +4,6 @@ import ${BaseEntityPackageName}${EntityPackageName}.${ClassName}Entity;
 import ${BasePackageName}${SqlBuilderPackageName}.${ClassName}SqlBuilder;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.FetchType;
-import tk.mybatis.mapper.common.BaseMapper;
 
 import java.util.List;
 
