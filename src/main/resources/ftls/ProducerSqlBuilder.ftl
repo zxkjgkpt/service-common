@@ -37,6 +37,8 @@ public class ${ClassName}SqlBuilder {
         String orSql = "";
         if (type == 1) {
             orSql = " || '%'";
+        } else {
+            orSql = " '%'";
         }
         String finalOrSql = orSql;
         String sqlResult = new SQL(){{

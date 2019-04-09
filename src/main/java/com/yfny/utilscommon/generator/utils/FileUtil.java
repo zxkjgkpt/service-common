@@ -40,8 +40,24 @@ public class FileUtil {
         fos.close();
     }
 
+    public static void addToJavaMapper(int type, Object data, String filePath) throws IOException, TemplateException {
+        Template tpl = getTemplate(type); // 获取模板文件
+        File file = new File(filePath);
+        // 填充数据
+        StringWriter writer = new StringWriter();
+        tpl.process(data, writer);
+        String addContents = writer.toString();
+        String fileContents = readFileContent(filePath, 0);
+        long content_length = fileContents.length();
+        long file_length = file.length();
 
-    public static void addToJava(int type, Object data, String filePath) throws IOException, TemplateException {
+        //System.out.println("readLenth: " + fileContents.length());
+        long position = fileContents.lastIndexOf("Condition\")") + (file_length - content_length);
+        //System.out.println("position: " + position);
+        addContainsToFile(filePath, position, addContents);
+    }
+
+    public static void addToJavaEnd(int type, Object data, String filePath) throws IOException, TemplateException {
         Template tpl = getTemplate(type); // 获取模板文件
         File file = new File(filePath);
         // 填充数据
