@@ -1,9 +1,6 @@
 package ${BasePackageName}${MapperPackageName};
 
-import tk.mybatis.mapper.common.ConditionMapper;
-import tk.mybatis.mapper.common.ExampleMapper;
-import tk.mybatis.mapper.common.IdsMapper;
-import tk.mybatis.mapper.common.MySqlMapper;
+import tk.mybatis.mapper.common.*;
 
 /**
  * 微服务通用Mapper
@@ -11,6 +8,6 @@ import tk.mybatis.mapper.common.MySqlMapper;
  * Date  ${Date}
  */
 @tk.mybatis.mapper.annotation.RegisterMapper
-public interface BaseMapper<T> extends tk.mybatis.mapper.common.BaseMapper<T>, MySqlMapper<T>, IdsMapper<T>, ConditionMapper<T>, ExampleMapper<T> {
+public interface BaseMapper<T> extends Mapper<T>, MySqlMapper<T>, IdsMapper<T>, ConditionMapper<T> {
 
 }
