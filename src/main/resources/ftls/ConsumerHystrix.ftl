@@ -1,10 +1,9 @@
 package ${BasePackageName}${HystrixPackageName};
 
 import ${BaseEntityPackageName}${EntityPackageName}.${ClassName}Entity;
-import ${BasePackageName}${ServicePackageName}.${ClassName}Service;
+import ${BasePackageName}${ServicePackageName}.${ClassName}Client;
+import com.yfny.utilscommon.basemvc.consumer.BaseHystrix;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * ${Description}Hystrix
@@ -12,26 +11,6 @@ import java.util.List;
  * Date  ${Date}
  */
 @Component
-public class ${ClassName}Hystrix extends BaseHystrix<${ClassName}Entity> implements ${ClassName}Service {
-
-    @Override
-    public List<${ClassName}Entity> find${ClassName}ByAndCondition(${ClassName}Entity ${ClassName?uncap_first}) {
-        return null;
-    }
-
-    @Override
-    public List<${ClassName}Entity> find${ClassName}ByAndCondition(${ClassName}Entity ${ClassName?uncap_first}, int pageNum, int pageSize) {
-        return null;
-    }
-
-    @Override
-    public List<${ClassName}Entity> find${ClassName}ByORCondition(${ClassName}Entity ${ClassName?uncap_first}) {
-        return null;
-    }
-
-    @Override
-    public List<${ClassName}Entity> find${ClassName}ByORCondition(${ClassName}Entity ${ClassName?uncap_first}, int pageNum, int pageSize) {
-        return null;
-    }
+public class ${ClassName}Hystrix extends BaseHystrix<${ClassName}Entity> implements ${ClassName}Client {
 
 }

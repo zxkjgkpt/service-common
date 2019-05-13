@@ -21,32 +21,13 @@ public class TaskQueue {
 
     /******************************************************此下方法为改造新增开始*****************************************************************/
 
-    public void initSingleTasks(String className, String tableName, String description, List<ColumnInfo> tableInfos, boolean isFirst) {
-        if (isFirst) {
-            taskQueue.add(new BaseEntityTask(className));
-        }
+    public void initSingleTasks(String className, String tableName, String description, List<ColumnInfo> tableInfos) {
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getEntity())) {
             taskQueue.add(new EntityTask(className, tableName, description, tableInfos));
         }
     }
 
-    private void initProducerBaseTasks(String className) {
-        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getMapper())) {
-            taskQueue.add(new ProducerBaseMapperTask(className));
-        }
-        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getService())) {
-            taskQueue.add(new ProducerBaseServiceImplTask(className));
-        }
-        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getController())) {
-            taskQueue.add(new ProducerBaseControllerTask(className));
-        }
-        taskQueue.add(new ExceptionHandlerTask(className));
-    }
-
-    public void initProducerTasks(String className, String tableName, String description, List<ColumnInfo> tableInfos, boolean isFirst) {
-        if (isFirst) {
-            initProducerBaseTasks(className);
-        }
+    public void initProducerTasks(String className, String tableName, String description, List<ColumnInfo> tableInfos) {
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getSqlbuilder())) {
             taskQueue.add(new ProducerSqlBuilderTask(className, tableName, description, tableInfos));
         }
@@ -56,33 +37,23 @@ public class TaskQueue {
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getService())) {
             taskQueue.add(new ProducerServiceImplTask(className, description));
         }
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getFuture())) {
+            taskQueue.add(new ProducerFutureTask(className, description));
+        }
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getController())) {
             taskQueue.add(new ProducerControllerTask(className, description));
         }
     }
 
-    private void initConsumerBaseTasks(String className) {
+    public void initConsumerTasks(String className, String description, String applicationName) {
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getService())) {
-            taskQueue.add(new ConsumerBaseServiceTask(className));
-        }
-        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getHystrix())) {
-            taskQueue.add(new ConsumerBaseHystrixTask(className));
-        }
-        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getController())) {
-            taskQueue.add(new ConsumerBaseControllerTask(className));
-        }
-        taskQueue.add(new ExceptionHandlerTask(className));
-    }
-
-    public void initConsumerTasks(String className, String description, String applicationName, boolean isFirst) {
-        if (isFirst) {
-            initConsumerBaseTasks(className);
-        }
-        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getService())) {
-            taskQueue.add(new ConsumerServiceTask(className, description, applicationName));
+            taskQueue.add(new ConsumerClientTask(className, description, applicationName));
         }
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getHystrix())) {
             taskQueue.add(new ConsumerHystrixTask(className, description));
+        }
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getFuture())) {
+            taskQueue.add(new ConsumerFutureTask(className, description));
         }
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getController())) {
             taskQueue.add(new ConsumerControllerTask(className, description));

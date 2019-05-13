@@ -177,34 +177,24 @@ public class FileUtil {
      */
     private static Template getTemplate(int type) throws IOException {
         switch (type) {
-            case FreemarketConfigUtils.TYPE_BASE_ENTITY:
-                return FreemarketConfigUtils.getInstance().getTemplate("BaseEntity.ftl");
             case FreemarketConfigUtils.TYPE_ENTITY:
                 return FreemarketConfigUtils.getInstance().getTemplate("Entity.ftl");
             case FreemarketConfigUtils.TYPE_PRODUCER_SQL_BUILDER:
                 return FreemarketConfigUtils.getInstance().getTemplate("ProducerSqlBuilder.ftl");
-            case FreemarketConfigUtils.TYPE_PRODUCER_BASE_MAPPER:
-                return FreemarketConfigUtils.getInstance().getTemplate("ProducerBaseMapper.ftl");
             case FreemarketConfigUtils.TYPE_PRODUCER_MAPPER:
                 return FreemarketConfigUtils.getInstance().getTemplate("ProducerMapper.ftl");
-            case FreemarketConfigUtils.TYPE_PRODUCER_BASE_SERVICE:
-                return FreemarketConfigUtils.getInstance().getTemplate("ProducerBaseServiceImpl.ftl");
             case FreemarketConfigUtils.TYPE_PRODUCER_SERVICE:
                 return FreemarketConfigUtils.getInstance().getTemplate("ProducerServiceImpl.ftl");
-            case FreemarketConfigUtils.TYPE_PRODUCER_BASE_CONTROLLER:
-                return FreemarketConfigUtils.getInstance().getTemplate("ProducerBaseController.ftl");
+            case FreemarketConfigUtils.TYPE_PRODUCER_FUTURE:
+                return FreemarketConfigUtils.getInstance().getTemplate("ProducerFuture.ftl");
             case FreemarketConfigUtils.TYPE_PRODUCER_CONTROLLER:
                 return FreemarketConfigUtils.getInstance().getTemplate("ProducerController.ftl");
-            case FreemarketConfigUtils.TYPE_CONSUMER_BASE_SERVICE:
-                return FreemarketConfigUtils.getInstance().getTemplate("ConsumerBaseService.ftl");
-            case FreemarketConfigUtils.TYPE_CONSUMER_SERVICE:
-                return FreemarketConfigUtils.getInstance().getTemplate("ConsumerService.ftl");
-            case FreemarketConfigUtils.TYPE_CONSUMER_BASE_HYSTRIX:
-                return FreemarketConfigUtils.getInstance().getTemplate("ConsumerBaseHystrix.ftl");
+            case FreemarketConfigUtils.TYPE_CONSUMER_CLIENT:
+                return FreemarketConfigUtils.getInstance().getTemplate("ConsumerClient.ftl");
             case FreemarketConfigUtils.TYPE_CONSUMER_HYSTRIX:
                 return FreemarketConfigUtils.getInstance().getTemplate("ConsumerHystrix.ftl");
-            case FreemarketConfigUtils.TYPE_CONSUMER_BASE_CONTROLLER:
-                return FreemarketConfigUtils.getInstance().getTemplate("ConsumerBaseController.ftl");
+            case FreemarketConfigUtils.TYPE_CONSUMER_FUTURE:
+                return FreemarketConfigUtils.getInstance().getTemplate("ConsumerFuture.ftl");
             case FreemarketConfigUtils.TYPE_CONSUMER_CONTROLLER:
                 return FreemarketConfigUtils.getInstance().getTemplate("ConsumerController.ftl");
             case FreemarketConfigUtils.TYPE_EXCEPTION_HANDLER:

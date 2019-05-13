@@ -41,8 +41,15 @@ public class ${ClassName}SqlBuilder {
             orSql = " '%'";
         }
         String finalOrSql = orSql;
-        String sqlResult = new SQL(){{
-            SELECT("*");
+        String sqlResult = new SQL() {{
+            SELECT(
+        <#assign ColumnInfoListSize = ColumnInfoList?size/>
+        <#assign ColumnInfoListIndex = 0/>
+        <#list ColumnInfoList as ColumnInfo>
+            <#assign ColumnInfoListIndex = ColumnInfoListIndex + 1/>
+                    "${ColumnInfo.columnName} AS ${ColumnInfo.propertyName}<#if ColumnInfoListSize!=ColumnInfoListIndex>," +<#else>"</#if>
+        </#list>
+                   );
             FROM("${TableName}");
         <#list ColumnInfoList as ColumnInfo>
             <#if ColumnInfo.typeName == "String">

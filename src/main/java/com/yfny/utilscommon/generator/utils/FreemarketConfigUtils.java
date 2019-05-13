@@ -12,26 +12,21 @@ import java.util.Locale;
  **/
 public class FreemarketConfigUtils {
     private static String path = new File(FreemarketConfigUtils.class.getClassLoader().getResource("ftls").getFile()).getPath();
-    public final static int TYPE_BASE_ENTITY = 0;
     public final static int TYPE_ENTITY = 1;
     public final static int TYPE_PRODUCER_SQL_BUILDER = 2;
-    public final static int TYPE_PRODUCER_BASE_MAPPER = 3;
-    public final static int TYPE_PRODUCER_MAPPER = 4;
-    public final static int TYPE_PRODUCER_BASE_SERVICE = 5;
-    public final static int TYPE_PRODUCER_SERVICE = 6;
-    public final static int TYPE_PRODUCER_BASE_CONTROLLER = 7;
-    public final static int TYPE_PRODUCER_CONTROLLER = 8;
-    public final static int TYPE_CONSUMER_BASE_SERVICE = 9;
-    public final static int TYPE_CONSUMER_SERVICE = 10;
-    public final static int TYPE_CONSUMER_BASE_HYSTRIX = 11;
-    public final static int TYPE_CONSUMER_HYSTRIX = 12;
-    public final static int TYPE_CONSUMER_BASE_CONTROLLER = 13;
-    public final static int TYPE_CONSUMER_CONTROLLER = 14;
-    public final static int TYPE_EXCEPTION_HANDLER = 15;
-    public final static int TYPE_ADD_ENTITY = 16;
-    public final static int TYPE_ADD_PRODUCER_MAPPER = 17;
-    public final static int TYPE_API_BASE_TEST = 18;
-    public final static int TYPE_API_UNIT_TEST = 19;
+    public final static int TYPE_PRODUCER_MAPPER = 3;
+    public final static int TYPE_PRODUCER_SERVICE = 4;
+    public final static int TYPE_PRODUCER_FUTURE = 5;
+    public final static int TYPE_PRODUCER_CONTROLLER = 6;
+    public final static int TYPE_CONSUMER_CLIENT = 7;
+    public final static int TYPE_CONSUMER_HYSTRIX = 8;
+    public final static int TYPE_CONSUMER_FUTURE = 9;
+    public final static int TYPE_CONSUMER_CONTROLLER = 10;
+    public final static int TYPE_EXCEPTION_HANDLER = 11;
+    public final static int TYPE_ADD_ENTITY = 12;
+    public final static int TYPE_ADD_PRODUCER_MAPPER = 13;
+    public final static int TYPE_API_BASE_TEST = 14;
+    public final static int TYPE_API_UNIT_TEST = 15;
 
     private static Configuration configuration;
 

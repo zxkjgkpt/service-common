@@ -13,8 +13,6 @@ import java.sql.SQLException;
  **/
 public class ConsumerInvoker extends AbstractInvoker {
 
-    protected boolean isFirst = false;
-
     protected String applicationName;
 
     @Override
@@ -24,7 +22,7 @@ public class ConsumerInvoker extends AbstractInvoker {
 
     @Override
     protected void initTasks() {
-        taskQueue.initConsumerTasks(className, description, applicationName, isFirst);
+        taskQueue.initConsumerTasks(className, description, applicationName);
     }
 
     public static class Builder extends AbstractBuilder {
@@ -40,12 +38,6 @@ public class ConsumerInvoker extends AbstractInvoker {
             invoker.setDescription(description);
             return this;
         }
-
-        public Builder setFirst(boolean isFirst) {
-            invoker.setFirst(isFirst);
-            return this;
-        }
-
 
         public Builder setApplicationName(String applicationName) {
             invoker.setApplicationName(applicationName);
@@ -66,14 +58,6 @@ public class ConsumerInvoker extends AbstractInvoker {
                 throw new Exception("ClassName can not be null, please set className.");
             }
         }
-    }
-
-    public boolean isFirst() {
-        return isFirst;
-    }
-
-    public void setFirst(boolean first) {
-        isFirst = first;
     }
 
     public String getApplicationName() {

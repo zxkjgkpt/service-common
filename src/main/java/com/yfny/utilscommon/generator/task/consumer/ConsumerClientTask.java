@@ -14,27 +14,33 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 代码生成器消费者服务层基类任务
+ * 代码生成器消费者服务层任务
  * Created by jisongZhou on 2019/3/27.
  **/
-public class ConsumerBaseServiceTask extends AbstractTask {
+public class ConsumerClientTask extends AbstractTask {
 
-    public ConsumerBaseServiceTask(String className) {
-        super(className);
+    public ConsumerClientTask(String className, String description, String applicationName) {
+        super(className, description, applicationName);
     }
 
     @Override
     public void run() throws IOException, TemplateException {
-        // 生成BaseService填充数据
+        // 生成Client填充数据
         Map<String, String> dataMap = new HashMap<>();
         dataMap.put("BasePackageName", ConfigUtil.getConfiguration().getPackageName());
         dataMap.put("ServicePackageName", ConfigUtil.getConfiguration().getPath().getService());
+        dataMap.put("BaseEntityPackageName", ConfigUtil.getConfiguration().getEntityPackageName());
+        dataMap.put("EntityPackageName", ConfigUtil.getConfiguration().getPath().getEntity());
+        dataMap.put("HystricPackageName", ConfigUtil.getConfiguration().getPath().getHystrix());
         dataMap.put("Author", ConfigUtil.getConfiguration().getAuthor());
         dataMap.put("Date", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        dataMap.put("ClassName", className);
+        dataMap.put("ApplicationName", applicationName);
+        dataMap.put("Description", StringUtil.isBlank(description) ? className : description);
         String filePath = FileUtil.getSourcePath() + StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) + StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getService());
-        String fileName = "BaseService.java";
-        // 生成BaseService文件
+        String fileName = className + "Client.java";
+        // 生成Client文件
         System.out.println("Generating " + fileName);
-        FileUtil.generateToJava(FreemarketConfigUtils.TYPE_CONSUMER_BASE_SERVICE, dataMap, filePath + fileName);
+        FileUtil.generateToJava(FreemarketConfigUtils.TYPE_CONSUMER_CLIENT, dataMap, filePath + fileName);
     }
 }

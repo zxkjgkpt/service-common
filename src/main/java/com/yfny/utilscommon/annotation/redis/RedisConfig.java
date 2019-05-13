@@ -1,4 +1,4 @@
-package com.yfny.utilscommon.redis;
+package com.yfny.utilscommon.annotation.redis;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

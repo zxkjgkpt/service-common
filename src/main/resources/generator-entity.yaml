@@ -11,6 +11,7 @@ path:
   service:
   entity: entity
   mapper:
+  future:
   sqlbuilder:
   hystrix:
   basetest:

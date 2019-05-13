@@ -16,17 +16,21 @@ public class ColumnInfo implements Serializable {
     private String typeName; //新增属性--类型名称
     private String propertyName; // 属性名
     private boolean isPrimaryKey; // 是否主键
+    private int length; //字段长度
+    private int nullable; //字段是否为NULL
 
     public ColumnInfo() {
 
     }
 
-    public ColumnInfo(String columnName, int type, boolean isPrimaryKey) {
+    public ColumnInfo(String columnName, int type, boolean isPrimaryKey, int length, int nullable) {
         this.columnName = columnName;
         this.type = type;
         this.typeName = TypeUtil.parseTypeFormSqlType(type);
         this.propertyName = StringUtil.columnName2PropertyName(columnName);
         this.isPrimaryKey = isPrimaryKey;
+        this.length = length;
+        this.nullable = nullable;
     }
 
     public String getColumnName() {
@@ -69,4 +73,19 @@ public class ColumnInfo implements Serializable {
         isPrimaryKey = primaryKey;
     }
 
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public int getNullable() {
+        return nullable;
+    }
+
+    public void setNullable(int nullable) {
+        this.nullable = nullable;
+    }
 }

@@ -18,7 +18,6 @@ public class Main {
                 .setTableName("user")
                 .setClassName("User")
                 .setDescription("用户")
-                .setFirst(true)
                 .build();
         invoker.execute();
     }
@@ -28,7 +27,6 @@ public class Main {
                 .setTableName("user")
                 .setClassName("User")
                 .setDescription("用户")
-                .setFirst(true)
                 .build();
         invoker.execute();
     }
@@ -38,7 +36,6 @@ public class Main {
                 .setClassName("User")
                 .setDescription("用户")
                 .setApplicationName("service-user")
-                .setFirst(true)
                 .build();
         invoker.execute();
     }

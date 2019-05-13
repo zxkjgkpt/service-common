@@ -1,4 +1,4 @@
-package com.yfny.utilscommon.redis;
+package com.yfny.utilscommon.annotation.redis;
 
 import com.yfny.utilscommon.util.ReflectUtils;
 import com.yfny.utilscommon.util.StringUtils;

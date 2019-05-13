@@ -1,4 +1,4 @@
-package com.yfny.utilscommon.redis;
+package com.yfny.utilscommon.annotation.redis;
 
 /**
  * Redis缓存自定义有效时间

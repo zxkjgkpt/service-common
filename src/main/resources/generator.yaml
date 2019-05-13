@@ -10,6 +10,7 @@ path:
   service: service
   entity: entity
   mapper: mapper
+  future: future
   sqlbuilder: sqlbuilder
   hystrix: fallback
   basetest: base

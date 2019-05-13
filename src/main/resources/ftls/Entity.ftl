@@ -1,11 +1,12 @@
 package ${BasePackageName}${EntityPackageName};
 
-import ${BasePackageName}base.BaseEntity;
+import com.yfny.utilscommon.basemvc.common.BaseEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -26,7 +27,10 @@ public class ${ClassName}Entity extends BaseEntity {
         <#if ColumnInfo.primaryKey>
     @Id
         </#if>
-    @Column(name = "${ColumnInfo.columnName}")
+        <#if ColumnInfo.nullable == 0>
+    @NotEmpty(message = "存在不能为空的字段未填写")
+        </#if>
+    @Column(name = "${ColumnInfo.columnName}", length = ${ColumnInfo.length})
     private ${ColumnInfo.typeName?cap_first} ${ColumnInfo.propertyName};
 
     </#list>

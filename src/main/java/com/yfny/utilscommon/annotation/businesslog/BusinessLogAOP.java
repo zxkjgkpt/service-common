@@ -1,4 +1,4 @@
-package com.yfny.utilscommon.businesslog;
+package com.yfny.utilscommon.annotation.businesslog;
 
 import com.yfny.utilscommon.util.PropertiesLoader;
 import com.yfny.utilscommon.util.StringUtils;
@@ -34,7 +34,7 @@ public class BusinessLogAOP implements Ordered {
 
     private Instant afterTime = null;
 
-    @Pointcut("@annotation(com.yfny.utilscommon.businesslog.BusinessLog)")
+    @Pointcut("@annotation(com.yfny.utilscommon.annotation.businesslog.BusinessLog)")
     public void annotationPointCut() {
     }
 

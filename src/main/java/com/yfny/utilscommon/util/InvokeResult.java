@@ -23,14 +23,14 @@ public class InvokeResult<T> {
     private T data;
 
     //配置读取器
-    private static PropertiesLoader loader = new PropertiesLoader("props/returnCode.properties");
+    private static PropertiesLoader loader = new PropertiesLoader("props/returncode.properties");
 
     public static <T> InvokeResult success(T data) {
         return success("", data, null);
     }
 
     public static <T> InvokeResult success(String code, T data, String... params) {
-        return getResultInit("", "", data, SUCCESS, null);
+        return getResultInit(code, "", data, SUCCESS, null);
     }
 
     public static InvokeResult failure() {
@@ -51,6 +51,40 @@ public class InvokeResult<T> {
 
     public static InvokeResult exception(String code, String... params) {
         return getResultInit(code, "", null, EXCEPTION, params);
+    }
+
+    /**
+     * 执行写入时的返回结果
+     *
+     * @param result        数据库写入结果
+     * @param successCode   成功编码
+     * @param failureCode1  非正常失败编码
+     * @param failureCode2  正常失败编码
+     * @return              统一调用响应格式
+     */
+    public static InvokeResult writeResult(int result, String successCode, String failureCode1, String failureCode2) {
+        if (result == 1) {
+            return InvokeResult.success(successCode, result);
+        }else if (result == -1) {
+            return InvokeResult.failure(failureCode1, "网络请求超时或服务器崩溃");
+        }
+        return InvokeResult.failure(failureCode2);
+    }
+
+    /**
+     * 执行读取时的返回结果
+     *
+     * @param result        数据库读取结果
+     * @param failureCode   非正常失败编码
+     * @return              统一调用响应格式
+     */
+    public static InvokeResult readResult(Object result, String failureCode) {
+        if (result != null) {
+            return InvokeResult.success(result);
+        }else if (result == null) {
+            return InvokeResult.failure(failureCode, "数据不存在或网络请求超时或服务器崩溃");
+        }
+        return InvokeResult.failure();
     }
 
     /**

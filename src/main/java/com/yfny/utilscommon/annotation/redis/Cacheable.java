@@ -1,4 +1,4 @@
-package com.yfny.utilscommon.redis;
+package com.yfny.utilscommon.annotation.redis;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

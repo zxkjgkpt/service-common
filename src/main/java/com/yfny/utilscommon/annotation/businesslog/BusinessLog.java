@@ -1,4 +1,4 @@
-package com.yfny.utilscommon.businesslog;
+package com.yfny.utilscommon.annotation.businesslog;
 
 
 import java.lang.annotation.*;

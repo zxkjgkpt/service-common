@@ -1,4 +1,4 @@
-package com.yfny.utilscommon.redis;
+package com.yfny.utilscommon.annotation.redis;
 
 import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.core.RedisTemplate;

@@ -14,8 +14,6 @@ import java.sql.SQLException;
  **/
 public class SingleInvoker extends AbstractInvoker {
 
-    protected boolean isFirst = false;
-
     @Override
     protected void getTableInfos() throws SQLException {
         tableInfos = connectionUtil.getMetaData(tableName);
@@ -23,7 +21,7 @@ public class SingleInvoker extends AbstractInvoker {
 
     @Override
     protected void initTasks() {
-        taskQueue.initSingleTasks(className, tableName, description, tableInfos, isFirst);
+        taskQueue.initSingleTasks(className, tableName, description, tableInfos);
     }
 
     public static class Builder extends AbstractBuilder {
@@ -41,11 +39,6 @@ public class SingleInvoker extends AbstractInvoker {
 
         public Builder setDescription(String description) {
             invoker.setDescription(description);
-            return this;
-        }
-
-        public Builder setFirst(boolean isFirst) {
-            invoker.setFirst(isFirst);
             return this;
         }
 
@@ -68,11 +61,4 @@ public class SingleInvoker extends AbstractInvoker {
         }
     }
 
-    public boolean isFirst() {
-        return isFirst;
-    }
-
-    public void setFirst(boolean first) {
-        isFirst = first;
-    }
 }

@@ -13,8 +13,6 @@ import java.sql.SQLException;
  **/
 public class ProducerInvoker extends AbstractInvoker {
 
-    protected boolean isFirst = false;
-
     @Override
     protected void getTableInfos() throws SQLException {
         tableInfos = connectionUtil.getMetaData(tableName);
@@ -22,7 +20,7 @@ public class ProducerInvoker extends AbstractInvoker {
 
     @Override
     protected void initTasks() {
-        taskQueue.initProducerTasks(className, tableName, description, tableInfos, isFirst);
+        taskQueue.initProducerTasks(className, tableName, description, tableInfos);
     }
 
     public static class Builder extends AbstractBuilder {
@@ -44,11 +42,6 @@ public class ProducerInvoker extends AbstractInvoker {
             return this;
         }
 
-        public Builder setFirst(boolean isFirst) {
-            invoker.setFirst(isFirst);
-            return this;
-        }
-
         @Override
         public Invoker build() {
             if (!isParamtersValid()) {
@@ -65,11 +58,4 @@ public class ProducerInvoker extends AbstractInvoker {
         }
     }
 
-    public boolean isFirst() {
-        return isFirst;
-    }
-
-    public void setFirst(boolean first) {
-        isFirst = first;
-    }
 }

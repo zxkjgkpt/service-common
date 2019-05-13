@@ -1,4 +1,4 @@
-package com.yfny.utilscommon.generator.task.producer;
+package com.yfny.utilscommon.generator.task.consumer;
 
 import com.yfny.utilscommon.generator.task.base.AbstractTask;
 import com.yfny.utilscommon.generator.utils.ConfigUtil;
@@ -14,29 +14,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 代码生成器生产者（微服务）控制层基类任务
- * Created by jisongZhou on 2019/3/26.
+ * 代码生成器消费者异步线程任务
+ * Created by jisongZhou on 2019/4/29.
  **/
-public class ProducerBaseControllerTask extends AbstractTask {
+public class ConsumerFutureTask extends AbstractTask {
 
-    public ProducerBaseControllerTask(String className) {
-        super(className);
+    public ConsumerFutureTask(String className, String description) {
+        super(className, description);
     }
 
     @Override
     public void run() throws IOException, TemplateException {
-        // 生成BaseController填充数据
+        // 生成Future填充数据
         Map<String, String> dataMap = new HashMap<>();
         dataMap.put("BasePackageName", ConfigUtil.getConfiguration().getPackageName());
-        dataMap.put("ControllerPackageName", ConfigUtil.getConfiguration().getPath().getController());
+        dataMap.put("FuturePackageName", ConfigUtil.getConfiguration().getPath().getFuture());
         dataMap.put("ServicePackageName", ConfigUtil.getConfiguration().getPath().getService());
         dataMap.put("BaseEntityPackageName", ConfigUtil.getConfiguration().getEntityPackageName());
+        dataMap.put("EntityPackageName", ConfigUtil.getConfiguration().getPath().getEntity());
         dataMap.put("Author", ConfigUtil.getConfiguration().getAuthor());
         dataMap.put("Date", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-        String filePath = FileUtil.getSourcePath() + StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) + StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getController());
-        String fileName = "BaseController.java";
-        // 生成BaseController文件
+        dataMap.put("ClassName", className);
+        dataMap.put("Description", StringUtil.isBlank(description) ? className : description);
+        String filePath = FileUtil.getSourcePath() + StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) + StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getFuture());
+        String fileName = className + "Future.java";
+        // 生成Future文件
         System.out.println("Generating " + fileName);
-        FileUtil.generateToJava(FreemarketConfigUtils.TYPE_PRODUCER_BASE_CONTROLLER, dataMap, filePath + fileName);
+        FileUtil.generateToJava(FreemarketConfigUtils.TYPE_CONSUMER_FUTURE, dataMap, filePath + fileName);
     }
 }

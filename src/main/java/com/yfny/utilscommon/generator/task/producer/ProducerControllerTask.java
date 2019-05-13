@@ -29,7 +29,7 @@ public class ProducerControllerTask extends AbstractTask {
         Map<String, String> dataMap = new HashMap<>();
         dataMap.put("BasePackageName", ConfigUtil.getConfiguration().getPackageName());
         dataMap.put("ControllerPackageName", ConfigUtil.getConfiguration().getPath().getController());
-        dataMap.put("ServicePackageName", ConfigUtil.getConfiguration().getPath().getService());
+        dataMap.put("FuturePackageName", ConfigUtil.getConfiguration().getPath().getFuture());
         dataMap.put("BaseEntityPackageName", ConfigUtil.getConfiguration().getEntityPackageName());
         dataMap.put("EntityPackageName", ConfigUtil.getConfiguration().getPath().getEntity());
         dataMap.put("Author", ConfigUtil.getConfiguration().getAuthor());

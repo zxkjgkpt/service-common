@@ -1,13 +1,12 @@
 package ${BasePackageName}${ControllerPackageName};
 
 import ${BaseEntityPackageName}${EntityPackageName}.${ClassName}Entity;
-import ${BasePackageName}${ServicePackageName}.BaseService;
-import ${BasePackageName}${ServicePackageName}.${ClassName}Service;
-import com.yfny.utilscommon.util.InvokeResult;
+import ${BasePackageName}${FuturePackageName}.${ClassName}Future;
+import com.yfny.utilscommon.basemvc.consumer.BaseController;
+import com.yfny.utilscommon.basemvc.consumer.BaseFuture;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * ${Description}Controller
@@ -19,89 +18,11 @@ import java.util.List;
 public class ${ClassName}Controller extends BaseController<${ClassName}Entity> {
 
     @Autowired
-    private ${ClassName}Service ${ClassName?uncap_first}Service;
+    private ${ClassName}Future ${ClassName?uncap_first}Future;
 
     @Override
-    public BaseService<${ClassName}Entity> getBaseService() {
-        return this.${ClassName?uncap_first}Service;
-    }
-
-    /**
-     * 根据实体中的属性值进行查询，查询条件使用LIKE，并列查询取交集
-     *
-     * @param   ${ClassName?uncap_first}    对象实体
-     * @return  返回对象列表为查询结果
-     */
-    @PostMapping(value = "/find${ClassName}ByAndCondition")
-    @ResponseBody
-    public InvokeResult find${ClassName}ByAndCondition1(@RequestBody ${ClassName}Entity ${ClassName?uncap_first}) throws Exception {
-        List<${ClassName}Entity> result = ${ClassName?uncap_first}Service.find${ClassName}ByAndCondition(${ClassName?uncap_first});
-        if (result != null) {
-            return InvokeResult.success(result);
-        }else if (result == null) {
-            return InvokeResult.failure("10003", "网络请求超时或服务器崩溃");
-        }
-        return InvokeResult.failure();
-    }
-
-    /**
-     * 根据实体中的属性值进行查询，查询条件使用LIKE，并列查询取交集，分页返回
-     *
-     * @param   ${ClassName?uncap_first}    对象实体
-     * @param   pageNum   页数
-     * @param   pageSize  每页数量
-     * @return  返回对象列表为查询结果
-     */
-    @PostMapping(value = "/find${ClassName}ByAndCondition/{pageNum}/{pageSize}")
-    @ResponseBody
-    public InvokeResult find${ClassName}ByAndCondition2(@RequestBody ${ClassName}Entity ${ClassName?uncap_first},
-                @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
-        List<${ClassName}Entity> result = ${ClassName?uncap_first}Service.find${ClassName}ByAndCondition(${ClassName?uncap_first}, pageNum, pageSize);
-        if (result != null) {
-            return InvokeResult.success(result);
-        }else if (result == null) {
-            return InvokeResult.failure("10003", "网络请求超时或服务器崩溃");
-        }
-        return InvokeResult.failure();
-    }
-
-    /**
-     * 根据实体中的属性值进行查询，查询条件使用LIKE，亦或查询取并集
-     *
-     * @param   ${ClassName?uncap_first}    对象实体
-     * @return  返回对象列表为查询结果
-     */
-    @PostMapping(value = "/find${ClassName}ByORCondition")
-    @ResponseBody
-    public InvokeResult find${ClassName}ByORCondition1(@RequestBody ${ClassName}Entity ${ClassName?uncap_first}) throws Exception {
-        List<${ClassName}Entity> result = ${ClassName?uncap_first}Service.find${ClassName}ByORCondition(${ClassName?uncap_first});
-        if (result != null) {
-            return InvokeResult.success(result);
-        }else if (result == null) {
-            return InvokeResult.failure("10003", "网络请求超时或服务器崩溃");
-        }
-        return InvokeResult.failure();
-    }
-
-    /**
-     * 根据实体中的属性值进行查询，查询条件使用LIKE，亦或查询取并集，分页返回
-     *
-     * @param   ${ClassName?uncap_first}    对象实体
-     * @param   pageNum   页数
-     * @param   pageSize  每页数量
-     * @return  返回对象列表为查询结果
-     */
-    @PostMapping(value = "/find${ClassName}ByORCondition/{pageNum}/{pageSize}")
-    @ResponseBody
-    public InvokeResult find${ClassName}ByORCondition2(@RequestBody ${ClassName}Entity ${ClassName?uncap_first},
-                @PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) throws Exception {
-        List<${ClassName}Entity> result = ${ClassName?uncap_first}Service.find${ClassName}ByORCondition(${ClassName?uncap_first}, pageNum, pageSize);
-        if (result != null) {
-            return InvokeResult.success(result);
-        }else if (result == null) {
-            return InvokeResult.failure("10003", "网络请求超时或服务器崩溃");
-        }
-        return InvokeResult.failure();
+    public BaseFuture<${ClassName}Entity> getBaseFuture() {
+        return this.${ClassName?uncap_first}Future;
     }
 
 }
