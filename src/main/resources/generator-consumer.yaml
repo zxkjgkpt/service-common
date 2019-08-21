@@ -12,6 +12,7 @@ path:
   entity: entity
   mapper:
   future: future
+  composite:
   sqlbuilder:
   hystrix: fallback
   basetest: base

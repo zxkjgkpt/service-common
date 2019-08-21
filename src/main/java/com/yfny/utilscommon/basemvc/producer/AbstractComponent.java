@@ -19,7 +19,13 @@ public abstract class AbstractComponent<T> {
 
     public abstract List<AbstractComponent> allList();
 
+    public abstract BaseMapper<T> getBaseMapper();
+
+    public abstract void setBaseMapper(BaseMapper<T> baseMapper);
+
     public abstract T getParam();
+
+    public abstract void setParam(T param);
 
     public abstract int insert();
 
@@ -30,7 +36,5 @@ public abstract class AbstractComponent<T> {
     public abstract int updateSelective();
 
     public abstract int delete();
-
-    public abstract int deleteByPrimaryKey(Object key);
 
 }

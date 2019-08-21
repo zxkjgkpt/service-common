@@ -20,7 +20,7 @@ public class ProducerInvoker extends AbstractInvoker {
 
     @Override
     protected void initTasks() {
-        taskQueue.initProducerTasks(className, tableName, description, tableInfos);
+        taskQueue.initProducerTasks(className, tableName, description, tableInfos, first);
     }
 
     public static class Builder extends AbstractBuilder {
@@ -39,6 +39,11 @@ public class ProducerInvoker extends AbstractInvoker {
 
         public Builder setDescription(String description) {
             invoker.setDescription(description);
+            return this;
+        }
+
+        public Builder setFirst(boolean isFirst) {
+            invoker.setFirst(isFirst);
             return this;
         }
 

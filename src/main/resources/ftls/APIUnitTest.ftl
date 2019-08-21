@@ -52,7 +52,9 @@ public class APIUnitTest extends APIBaseTest {
                         <#if field.name != "serialVersionUID" && field.name != "pageNum"
                         && field.name != "pageSize" && field.name != "pageCount"
                         && field.name != "total" && field.name != "orders"
-                        && field.name != "ASC" && field.name != "DESC">
+                        && field.name != "ASC" && field.name != "DESC"
+                        && field.name != "INSERT" && field.name != "UPDATE"
+                        && field.name != "DELETE" && field.name != "SELECT">
         ${requestParam.parameter.name}.set${field.name?cap_first}(null);
                         </#if>
                     </#list>

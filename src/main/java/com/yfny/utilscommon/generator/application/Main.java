@@ -27,6 +27,7 @@ public class Main {
                 .setTableName("user")
                 .setClassName("User")
                 .setDescription("用户")
+                .setFirst(true)
                 .build();
         invoker.execute();
     }

@@ -1,9 +1,13 @@
 package com.yfny.utilscommon.util;
 
+import tk.mybatis.mapper.entity.EntityColumn;
+import tk.mybatis.mapper.mapperhelper.EntityHelper;
+
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 反射机制工具类
@@ -191,7 +195,6 @@ public class ReflectUtils {
      * @return : 父类中的属性值
      */
     public static Object getFieldValue(Object object, String fieldName) {
-
         //根据 对象和属性名通过反射 调用上面的方法获取 Field对象
         Field field = getDeclaredField(object, fieldName);
         //抑制Java对其的检查
@@ -204,4 +207,148 @@ public class ReflectUtils {
         }
         return null;
     }
+
+    /**
+     * 获取对象中指定注解的字段名称
+     *
+     * @param object 对象
+     * @param clazzs 注解类型
+     * @return 字段名列表
+     */
+    public static List<String> getAnnotationFieldName(Object object, Class<? extends Annotation>... clazzs) {
+        Field[] localFields = object.getClass().getDeclaredFields();
+        List<String> annotationFieldNameList = new ArrayList<>();
+        for (Field annotationField : localFields) {
+            for (Class clazz : clazzs) {
+                if (annotationField.isAnnotationPresent(clazz)) {
+                    annotationFieldNameList.add(annotationField.getName());
+                }
+            }
+        }
+        return annotationFieldNameList;
+    }
+
+    /**
+     * 获取指定类中静态变量的值
+     *
+     * @param clazz
+     * @param fieldName
+     * @return
+     */
+    public static Object getStaticFieldValue(Class<?> clazz, String fieldName) {
+        try {
+            Field field = clazz.getField(fieldName);
+            Object object = field.get(clazz);
+            return object;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 根据类别创建实体对象
+     *
+     * @param clazz 类别
+     * @return
+     */
+    public static Object createInstance(Class<?> clazz) {
+        try {
+            return clazz.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 根据类别名称创建实体对象
+     *
+     * @param className 类别全路径
+     * @return
+     */
+    public static Object createInstance(String className) {
+        try {
+            Class clazz = Class.forName(className);
+            Object obj = clazz.newInstance();
+            return obj;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 根据类别名称创建实体对象
+     *
+     * @param className 类别全路径
+     * @return
+     */
+    public static Class<?> getClazz(String className) {
+        try {
+            Class clazz = Class.forName(className);
+            return clazz;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 获取主键取值
+     *
+     * @param entity 对象实体
+     * @return 主键
+     */
+    public static Object getPKValue(Object entity) {
+        Set<EntityColumn> columnList = EntityHelper.getPKColumns(entity.getClass());
+        EntityColumn column = columnList.iterator().next();
+        Object pkValue = null;
+        try {
+            pkValue = column.getEntityField().getValue(entity);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return pkValue;
+    }
+
+    /**
+     * 设置主键取值（有则不重设，没有则设置uuid）
+     *
+     * @param entity 对象实体
+     * @return 是否存在主键，true为原来已存在，false为原来不存在
+     */
+    public static boolean setPKValue(Object entity) {
+        boolean isExistPkValue = false;
+        Set<EntityColumn> columnList = EntityHelper.getPKColumns(entity.getClass());
+        EntityColumn column = columnList.iterator().next();
+        String pkName = column.getEntityField().getName();
+        try {
+            Object pkValue = column.getEntityField().getValue(entity);
+            if (pkValue != null) {
+                isExistPkValue = true;
+                if (pkValue instanceof String) {
+                    if (StringUtils.isBlank((String) pkValue)) {
+                        pkValue = StringUtils.uuid();
+                        ReflectUtils.setFieldValue(entity, pkName, pkValue);
+                        isExistPkValue = false;
+                    }
+                }
+            } else {
+                pkValue = StringUtils.uuid();
+                ReflectUtils.setFieldValue(entity, pkName, pkValue);
+            }
+            return isExistPkValue;
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

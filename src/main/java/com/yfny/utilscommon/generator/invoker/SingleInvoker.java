@@ -21,7 +21,7 @@ public class SingleInvoker extends AbstractInvoker {
 
     @Override
     protected void initTasks() {
-        taskQueue.initSingleTasks(className, tableName, description, tableInfos);
+        taskQueue.initSingleTasks(className, tableName, description, tableInfos, foreignKey);
     }
 
     public static class Builder extends AbstractBuilder {
@@ -39,6 +39,11 @@ public class SingleInvoker extends AbstractInvoker {
 
         public Builder setDescription(String description) {
             invoker.setDescription(description);
+            return this;
+        }
+
+        public Builder setForeignKey(String foreignKey) {
+            invoker.setForeignKey(foreignKey);
             return this;
         }
 

@@ -185,6 +185,10 @@ public class FileUtil {
                 return FreemarketConfigUtils.getInstance().getTemplate("ProducerMapper.ftl");
             case FreemarketConfigUtils.TYPE_PRODUCER_SERVICE:
                 return FreemarketConfigUtils.getInstance().getTemplate("ProducerServiceImpl.ftl");
+            case FreemarketConfigUtils.TYPE_PRODUCER_COMPOSITE:
+                return FreemarketConfigUtils.getInstance().getTemplate("ProducerComposite.ftl");
+            case FreemarketConfigUtils.TYPE_PRODUCER_BEFORE_SERVICE:
+                return FreemarketConfigUtils.getInstance().getTemplate("ProducerBeforeServiceImpl.ftl");
             case FreemarketConfigUtils.TYPE_PRODUCER_FUTURE:
                 return FreemarketConfigUtils.getInstance().getTemplate("ProducerFuture.ftl");
             case FreemarketConfigUtils.TYPE_PRODUCER_CONTROLLER:

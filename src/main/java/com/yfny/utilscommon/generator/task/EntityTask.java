@@ -21,8 +21,8 @@ import java.util.Map;
  **/
 public class EntityTask extends AbstractTask {
 
-    public EntityTask(String className, String tableName, String description, List<ColumnInfo> tableInfos) {
-        super(className, tableName, description, tableInfos);
+    public EntityTask(String className, String tableName, String description, List<ColumnInfo> tableInfos, String foreignKey) {
+        super(className, tableName, description, tableInfos, foreignKey);
     }
 
     @Override
@@ -36,6 +36,7 @@ public class EntityTask extends AbstractTask {
         dataMap.put("ColumnInfoList", tableInfos);
         dataMap.put("ClassName", className);
         dataMap.put("TableName", tableName);
+        dataMap.put("ForeignKey", foreignKey);
         dataMap.put("Description", StringUtil.isBlank(description) ? className : description);
 
         String filePath = FileUtil.getSourcePath() + StringUtil.package2Path(ConfigUtil.getConfiguration().getPackageName()) + StringUtil.package2Path(ConfigUtil.getConfiguration().getPath().getEntity());

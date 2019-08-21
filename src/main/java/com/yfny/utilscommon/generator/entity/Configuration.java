@@ -98,6 +98,7 @@ public class Configuration implements Serializable {
         private String entity;
         private String mapper;
         private String future;//新增属性--组合式异步线程
+        private String composite;//新增属性--组合模式构件
         private String sqlbuilder;//新增属性--sql语句构造器
         private String hystrix;//新增属性--熔断器
         private String basetest;//新增属性--单元测试基类
@@ -106,12 +107,13 @@ public class Configuration implements Serializable {
         public Path() {
         }
 
-        public Path(String controller, String service, String entity, String mapper, String future, String sqlbuilder, String hystrix, String basetest, String unittest) {
+        public Path(String controller, String service, String entity, String mapper, String future, String composite, String sqlbuilder, String hystrix, String basetest, String unittest) {
             this.controller = controller;
             this.service = service;
             this.entity = entity;
             this.mapper = mapper;
             this.future = future;
+            this.composite = composite;
             this.sqlbuilder = sqlbuilder;
             this.hystrix = hystrix;
             this.basetest = basetest;
@@ -156,6 +158,14 @@ public class Configuration implements Serializable {
 
         public void setFuture(String future) {
             this.future = future;
+        }
+
+        public String getComposite() {
+            return composite;
+        }
+
+        public void setComposite(String composite) {
+            this.composite = composite;
         }
 
         public String getSqlbuilder() {

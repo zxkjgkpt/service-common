@@ -2,9 +2,11 @@ package com.yfny.utilscommon.basemvc.consumer;
 
 import com.yfny.utilscommon.util.InvokeResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.concurrent.CompletableFuture;
 

@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -271,6 +272,31 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         } catch (Exception exception2) {
             return false;
         }
+    }
+
+    //首字母转小写
+    public static String toLowerCaseFirstOne(String s) {
+        if (Character.isLowerCase(s.charAt(0)))
+            return s;
+        else
+            return (new StringBuilder()).append(Character.toLowerCase(s.charAt(0))).append(s.substring(1)).toString();
+    }
+
+    //首字母转大写
+    public static String toUpperCaseFirstOne(String s) {
+        if (Character.isUpperCase(s.charAt(0)))
+            return s;
+        else
+            return (new StringBuilder()).append(Character.toUpperCase(s.charAt(0))).append(s.substring(1)).toString();
+    }
+
+    /**
+     * uuid生成方法
+     *
+     * @return uuid
+     */
+    public static String uuid() {
+        return UUID.randomUUID().toString().replaceAll("-", "");
     }
 
     /**

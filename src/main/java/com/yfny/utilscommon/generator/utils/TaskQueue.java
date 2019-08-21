@@ -2,9 +2,15 @@ package com.yfny.utilscommon.generator.utils;
 
 import com.yfny.utilscommon.generator.entity.ColumnInfo;
 import com.yfny.utilscommon.generator.invoker.RelationInvoker;
-import com.yfny.utilscommon.generator.task.*;
+import com.yfny.utilscommon.generator.task.APIBaseTestTask;
+import com.yfny.utilscommon.generator.task.APIUnitTestTask;
+import com.yfny.utilscommon.generator.task.EntityAddTask;
+import com.yfny.utilscommon.generator.task.EntityTask;
 import com.yfny.utilscommon.generator.task.base.AbstractTask;
-import com.yfny.utilscommon.generator.task.consumer.*;
+import com.yfny.utilscommon.generator.task.consumer.ConsumerClientTask;
+import com.yfny.utilscommon.generator.task.consumer.ConsumerControllerTask;
+import com.yfny.utilscommon.generator.task.consumer.ConsumerFutureTask;
+import com.yfny.utilscommon.generator.task.consumer.ConsumerHystrixTask;
 import com.yfny.utilscommon.generator.task.producer.*;
 
 import java.util.LinkedList;
@@ -21,13 +27,16 @@ public class TaskQueue {
 
     /******************************************************此下方法为改造新增开始*****************************************************************/
 
-    public void initSingleTasks(String className, String tableName, String description, List<ColumnInfo> tableInfos) {
+    public void initSingleTasks(String className, String tableName, String description, List<ColumnInfo> tableInfos, String foreignKey) {
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getEntity())) {
-            taskQueue.add(new EntityTask(className, tableName, description, tableInfos));
+            taskQueue.add(new EntityTask(className, tableName, description, tableInfos, foreignKey));
         }
     }
 
-    public void initProducerTasks(String className, String tableName, String description, List<ColumnInfo> tableInfos) {
+    public void initProducerTasks(String className, String tableName, String description, List<ColumnInfo> tableInfos, boolean isFirst) {
+        if (isFirst) {
+            taskQueue.add(new ProducerBeforeServiceImplTask(className, description));
+        }
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getSqlbuilder())) {
             taskQueue.add(new ProducerSqlBuilderTask(className, tableName, description, tableInfos));
         }
@@ -36,6 +45,9 @@ public class TaskQueue {
         }
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getService())) {
             taskQueue.add(new ProducerServiceImplTask(className, description));
+        }
+        if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getComposite())) {
+            taskQueue.add(new ProducerCompositeTask(className, description));
         }
         if (!StringUtil.isBlank(ConfigUtil.getConfiguration().getPath().getFuture())) {
             taskQueue.add(new ProducerFutureTask(className, description));

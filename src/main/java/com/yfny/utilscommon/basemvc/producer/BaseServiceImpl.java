@@ -5,18 +5,12 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.yfny.utilscommon.basemvc.common.BaseEntity;
 import com.yfny.utilscommon.strategy.PageResultStrategy;
-import com.yfny.utilscommon.util.ReflectUtils;
 import com.yfny.utilscommon.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mybatis.mapper.entity.EntityColumn;
-import tk.mybatis.mapper.mapperhelper.EntityHelper;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * 微服务通用ServiceImpl
@@ -48,7 +42,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> {
     @LcnTransaction //分布式事务注解
     @Transactional  //本地事务注解
     public int insert(T entity) {
-        setPKValue(entity);
+        save();
         return getBaseMapper().insert(entity);
     }
 
@@ -61,13 +55,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> {
     @LcnTransaction //分布式事务注解
     @Transactional  //本地事务注解
     public int insertSelective(T entity) {
-        setPKValue(entity);
-        if (getBaseComponent().list != null && getBaseComponent().list.size() > 0) {
-            for (Object composite : getBaseComponent().list) {
-                setPKValue((T)(((AbstractComponent) composite).getParam()));
-                ((AbstractComponent) composite).insertSelective();
-            }
-        }
+        saveSelective();
         return getBaseMapper().insertSelective(entity);
     }
 
@@ -80,6 +68,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> {
     @LcnTransaction //分布式事务注解
     @Transactional  //本地事务注解
     public int update(T entity) {
+        save();
         return getBaseMapper().updateByPrimaryKey(entity);
     }
 
@@ -92,45 +81,56 @@ public abstract class BaseServiceImpl<T extends BaseEntity> {
     @LcnTransaction //分布式事务注解
     @Transactional  //本地事务注解
     public int updateSelective(T entity) {
+        saveSelective();
         return getBaseMapper().updateByPrimaryKeySelective(entity);
     }
 
     /**
      * 保存一个实体，null的属性也会保存，不会使用数据库默认值
-     *
-     * @param entity 对象实体
-     * @return 返回0为失败，返回1为成功
      */
-    @LcnTransaction //分布式事务注解
-    @Transactional  //本地事务注解
-    public int save(T entity) {
-        int result;
-        Object pkValue = getPKValue(entity);
-        if (!existsWithPrimaryKey(pkValue)) {
-            result = insert(entity);
-        } else {
-            result = update(entity);
+    private void save() {
+        if (getBaseComponent().list != null && getBaseComponent().list.size() > 0) {
+            for (Object composite : getBaseComponent().list) {
+                int action = ((BaseEntity) ((AbstractComponent) composite).getParam()).getAction();
+                switch (action) {
+                    case BaseEntity.INSERT:
+                        ((AbstractComponent) composite).insert();
+                        break;
+                    case BaseEntity.UPDATE:
+                        ((AbstractComponent) composite).update();
+                        break;
+                    case BaseEntity.DELETE:
+                        ((AbstractComponent) composite).delete();
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
-        return result;
     }
 
     /**
      * 保存一个实体，null的属性不会保存，会使用数据库默认值
-     *
-     * @param entity 对象实体
-     * @return 返回0为失败，返回1为成功
      */
-    @LcnTransaction //分布式事务注解
-    @Transactional  //本地事务注解
-    public int saveSelective(T entity) {
-        int result;
-        Object pkValue = getPKValue(entity);
-        if (!existsWithPrimaryKey(pkValue)) {
-            result = insertSelective(entity);
-        } else {
-            result = updateSelective(entity);
+    private void saveSelective() {
+        if (getBaseComponent().list != null && getBaseComponent().list.size() > 0) {
+            for (Object composite : getBaseComponent().list) {
+                int action = ((BaseEntity) ((AbstractComponent) composite).getParam()).getAction();
+                switch (action) {
+                    case BaseEntity.INSERT:
+                        ((AbstractComponent) composite).insertSelective();
+                        break;
+                    case BaseEntity.UPDATE:
+                        ((AbstractComponent) composite).updateSelective();
+                        break;
+                    case BaseEntity.DELETE:
+                        ((AbstractComponent) composite).delete();
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
-        return result;
     }
 
     /**
@@ -142,6 +142,11 @@ public abstract class BaseServiceImpl<T extends BaseEntity> {
     @LcnTransaction //分布式事务注解
     @Transactional  //本地事务注解
     public int delete(T entity) {
+        if (getBaseComponent().list != null && getBaseComponent().list.size() > 0) {
+            for (Object composite : getBaseComponent().list) {
+                ((AbstractComponent) composite).delete();
+            }
+        }
         return getBaseMapper().delete(entity);
     }
 
@@ -284,74 +289,6 @@ public abstract class BaseServiceImpl<T extends BaseEntity> {
     public List<T> findListByORCondition(T entity, String pageNum, String pageSize) {
         PageResultStrategy pageResultStrategy = () -> getBaseMapper().findListByORCondition(entity);
         return findPageResultList(pageResultStrategy, pageNum, pageSize);
-    }
-
-    /**
-     * 获取主键取值
-     *
-     * @param entity 对象实体
-     * @return 主键
-     */
-    public Object getPKValue(T entity) {
-        Set<EntityColumn> columnList = EntityHelper.getPKColumns(entity.getClass());
-        EntityColumn column = columnList.iterator().next();
-        Object pkValue = null;
-        try {
-            pkValue = column.getEntityField().getValue(entity);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return pkValue;
-    }
-
-    /**
-     * 设置主键取值
-     *
-     * @param entity 对象实体
-     */
-    public void setPKValue(T entity) {
-        Set<EntityColumn> columnList = EntityHelper.getPKColumns(entity.getClass());
-        EntityColumn column = columnList.iterator().next();
-        String pkName = column.getEntityField().getName();
-        try {
-            Object pkValue = column.getEntityField().getValue(entity);
-            if (pkValue != null) {
-                if (pkValue instanceof String) {
-                    if (StringUtils.isBlank((String) pkValue)) {
-                        pkValue = generatorPkValue(entity);
-                        ReflectUtils.setFieldValue(entity, pkName, pkValue);
-                    }
-                }
-            } else {
-                pkValue = generatorPkValue(entity);
-                ReflectUtils.setFieldValue(entity, pkName, pkValue);
-            }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 生成主键
-     *
-     * @param entity 对象实体
-     * @return 主键
-     */
-    public Object generatorPkValue(T entity) {
-        return uuid();
-    }
-
-    /**
-     * uuid生成方法
-     *
-     * @return uuid
-     */
-    public static String uuid() {
-        return UUID.randomUUID().toString().replaceAll("-", "");
     }
 
     /**

@@ -23,7 +23,8 @@ public abstract class AbstractInvoker implements Invoker {
     protected String tableName;
     protected String className;
     protected String description;//新增属性--描述
-    protected String foreignKey;//外键
+    protected String foreignKey = "";//外键
+    protected boolean first = false;
     protected Map<String, String> relationClassNameMap;
     protected List<ColumnInfo> tableInfos;
     protected ConnectionUtil connectionUtil = new ConnectionUtil();
@@ -83,6 +84,10 @@ public abstract class AbstractInvoker implements Invoker {
         this.foreignKey = foreignKey;
     }
 
+    public void setFirst(boolean first) {
+        this.first = first;
+    }
+
     public void setRelationClassNameMap(Map<String, String> relationClassNameMap) {
         this.relationClassNameMap = relationClassNameMap;
     }
@@ -101,6 +106,10 @@ public abstract class AbstractInvoker implements Invoker {
 
     public String getForeignKey() {
         return foreignKey;
+    }
+
+    public boolean isFirst() {
+        return first;
     }
 
     public Map<String, String> getRelationClassNameMap() {

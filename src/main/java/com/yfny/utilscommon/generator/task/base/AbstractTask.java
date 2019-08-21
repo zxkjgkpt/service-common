@@ -58,7 +58,7 @@ public abstract class AbstractTask implements Serializable {
     }
 
     /**
-     * Entity
+     * SqlBuilder
      *
      * @param className
      * @param tableName
@@ -70,6 +70,23 @@ public abstract class AbstractTask implements Serializable {
         this.tableName = tableName;
         this.description = description;
         this.tableInfos = tableInfos;
+    }
+
+    /**
+     * Entity
+     *
+     * @param className
+     * @param tableName
+     * @param description
+     * @param tableInfos
+     * @param foreignKey
+     */
+    public AbstractTask(String className, String tableName, String description, List<ColumnInfo> tableInfos, String foreignKey) {
+        this.className = className;
+        this.tableName = tableName;
+        this.description = description;
+        this.tableInfos = tableInfos;
+        this.foreignKey = foreignKey;
     }
 
     /**

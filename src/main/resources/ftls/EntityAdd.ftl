@@ -1,8 +1,10 @@
     <#list RelationClassNameMap?keys as ClassName>
         <#if RelationClassNameMap[ClassName] == "ONE2ONE">
+    @OneToOne
     @Transient
     private ${ClassName}Entity ${ClassName?uncap_first};
         <#elseif RelationClassNameMap[ClassName] == "ONE2MANY">
+    @OneToMany
     @Transient
     private List<${ClassName}Entity> ${ClassName?uncap_first}List;
         </#if>

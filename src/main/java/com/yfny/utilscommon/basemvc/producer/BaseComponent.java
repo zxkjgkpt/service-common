@@ -76,8 +76,4 @@ public abstract class BaseComponent<T extends BaseEntity> extends AbstractCompon
         return getBaseMapper().delete(getParam());
     }
 
-    public int deleteByPrimaryKey(Object key) {
-        return getBaseMapper().deleteByPrimaryKey(key);
-    }
-
 }

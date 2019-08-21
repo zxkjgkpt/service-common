@@ -9,10 +9,18 @@ import java.util.Map;
  * Author jisongZhou
  * Date  2019-04-03
  */
-public abstract class BaseEntity implements Serializable {
+public class BaseEntity implements Serializable {
 
     public final static String ASC = "ASC";//升序
     public final static String DESC = "DESC";//降序
+
+    public final static int INSERT = 1;//插入
+    public final static int UPDATE = 2;//更新
+    public final static int DELETE = 3;//删除
+    public final static int SELECT = 4;//查询
+
+    @Transient
+    private Integer action = SELECT;//执行动作
 
     @Transient
     private Integer pageNum;//当前页数
@@ -31,6 +39,14 @@ public abstract class BaseEntity implements Serializable {
 
     public BaseEntity() {
 
+    }
+
+    public Integer getAction() {
+        return action;
+    }
+
+    public void setAction(Integer action) {
+        this.action = action;
     }
 
     public Integer getPageNum() {
@@ -72,4 +88,5 @@ public abstract class BaseEntity implements Serializable {
     public void setOrders(Map<String, String> orders) {
         this.orders = orders;
     }
+
 }

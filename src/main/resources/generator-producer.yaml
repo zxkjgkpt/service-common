@@ -12,6 +12,7 @@ path:
   entity: entity
   mapper: mapper
   future: future
+  composite: composite
   sqlbuilder: sqlbuilder
   hystrix:
   basetest: base

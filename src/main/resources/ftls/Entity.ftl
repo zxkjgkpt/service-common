@@ -1,5 +1,6 @@
 package ${BasePackageName}${EntityPackageName};
 
+import com.yfny.utilscommon.annotation.relation.*;
 import com.yfny.utilscommon.basemvc.common.BaseEntity;
 
 import javax.persistence.Column;
@@ -27,10 +28,13 @@ public class ${ClassName}Entity extends BaseEntity {
         <#if ColumnInfo.primaryKey>
     @Id
         </#if>
+        <#if ColumnInfo.propertyName == ForeignKey>
+    @ForeignKey
+        </#if>
         <#if ColumnInfo.nullable == 0>
     @NotEmpty(message = "存在不能为空的字段未填写")
         </#if>
-    @Column(name = "${ColumnInfo.columnName}", length = ${ColumnInfo.length})
+    @Column(name = "${ColumnInfo.columnName}", length = ${ColumnInfo.length?c})
     private ${ColumnInfo.typeName?cap_first} ${ColumnInfo.propertyName};
 
     </#list>
